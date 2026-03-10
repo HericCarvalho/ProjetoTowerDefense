@@ -1,4 +1,4 @@
-# \[NECROPUNK] - GDD
+# \[NECROPUNK 2] - GDD
 
 &nbsp;
 
