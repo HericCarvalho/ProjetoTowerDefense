@@ -3,28 +3,29 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Transform target;
-
     public float speed = 20f;
     public float damage = 50f;
 
     public GameObject ownerTower;
 
-    public void Seek(Transform _target, GameObject tower)
+    private GameObject prefabReference;
+
+    public void Seek(Transform _target, GameObject tower, GameObject prefab)
     {
         target = _target;
         ownerTower = tower;
+        prefabReference = prefab;
     }
 
     void Update()
     {
         if (target == null)
         {
-            ObjectPool.instance.ReturnObject(gameObject);
+            ReturnToPool();
             return;
         }
 
         Vector3 dir = target.position - transform.position;
-
         float distanceThisFrame = speed * Time.deltaTime;
 
         if (dir.magnitude <= distanceThisFrame)
@@ -52,6 +53,11 @@ public class Bullet : MonoBehaviour
             }
         }
 
-        ObjectPool.instance.ReturnObject(gameObject);
+        ReturnToPool();
+    }
+
+    void ReturnToPool()
+    {
+        ObjectPool.instance.ReturnObject(gameObject, prefabReference);
     }
 }

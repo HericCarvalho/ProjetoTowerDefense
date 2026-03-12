@@ -3,13 +3,11 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public float speed = 5f;
-
-    private Transform target;
     private int waypointIndex = 0;
 
-    void Start()
+    void OnEnable()
     {
-        target = Waypoints.points[0];
+        waypointIndex = 0; 
     }
 
     void Update()
@@ -19,29 +17,20 @@ public class EnemyMovement : MonoBehaviour
 
     void Move()
     {
+        if (waypointIndex >= EnemyPath.instance.WaypointCount())
+            return;
+
+        Transform target = EnemyPath.instance.GetWaypoint(waypointIndex);
         Vector3 dir = target.position - transform.position;
+
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
 
-        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        if (Vector3.Distance(transform.position, target.position) < 0.2f)
         {
-            GetNextWaypoint();
+            waypointIndex++;
         }
     }
-    void GetNextWaypoint()
-    {
-        if (waypointIndex >= Waypoints.points.Length - 1)
-        {
-            ReachEnd();
-            return;
-        }
 
-        waypointIndex++;
-        target = Waypoints.points[waypointIndex];
-    }
-    void ReachEnd()
-    {
-        Destroy(gameObject);
-    }
     public float GetProgress()
     {
         return waypointIndex;

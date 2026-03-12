@@ -9,6 +9,9 @@ public class TowerStats : MonoBehaviour
     public float fireRate;
     public float damage;
 
+    [Header("Prefabs")]
+    public GameObject bulletPrefab;
+
     void Awake()
     {
         ApplyData();

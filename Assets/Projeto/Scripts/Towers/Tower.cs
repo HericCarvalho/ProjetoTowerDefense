@@ -29,7 +29,6 @@ public class Tower : MonoBehaviour
     void Start()
     {
         stats = GetComponent<TowerStats>();
-
         xpToNextLevel = stats.data.baseXPToLevel;
     }
 
@@ -65,13 +64,17 @@ public class Tower : MonoBehaviour
 
         foreach (Transform enemy in EnemyManager.instance.enemies)
         {
-            float distance = Vector3.Distance(transform.position, enemy.position);
+            if (!enemy.gameObject.activeInHierarchy)
+                continue; 
 
+            float distance = Vector3.Distance(transform.position, enemy.position);
             if (distance > stats.range)
                 continue;
 
             EnemyMovement movement = enemy.GetComponent<EnemyMovement>();
             EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+            if (movement == null || health == null)
+                continue;
 
             float value = 0f;
 
@@ -79,7 +82,7 @@ public class Tower : MonoBehaviour
             {
                 case TargetMode.First:
                     value = movement.GetProgress();
-                    if (value > bestValue)
+                    if (bestTarget == null || value > bestValue)
                     {
                         bestValue = value;
                         bestTarget = enemy;
@@ -97,7 +100,7 @@ public class Tower : MonoBehaviour
 
                 case TargetMode.Closest:
                     value = distance;
-                    if (bestTarget == null || value < bestValue)
+                    if (bestTarget == null || value < bestValue || bestTarget == null)
                     {
                         bestValue = value;
                         bestTarget = enemy;
@@ -105,8 +108,8 @@ public class Tower : MonoBehaviour
                     break;
 
                 case TargetMode.Strongest:
-                    value = health.health;
-                    if (value > bestValue)
+                    value = health.CurrentHealth;
+                    if (bestTarget == null || value > bestValue)
                     {
                         bestValue = value;
                         bestTarget = enemy;
@@ -120,7 +123,7 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bulletGO = ObjectPool.instance.GetObject();
+        GameObject bulletGO = ObjectPool.instance.GetObject(stats.bulletPrefab);
 
         bulletGO.transform.position = firePoint.position;
         bulletGO.transform.rotation = firePoint.rotation;
@@ -129,7 +132,7 @@ public class Tower : MonoBehaviour
 
         bullet.damage = stats.damage;
 
-        bullet.Seek(target, gameObject);
+        bullet.Seek(target, gameObject, stats.bulletPrefab);
     }
 
     public void GainXP(int amount)
