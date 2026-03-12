@@ -27,8 +27,17 @@ public class MobileCameraController : MonoBehaviour
 
     void Update()
     {
-        HandleTouchMovement();
-        HandlePinchZoom();
+        if (Application.isEditor)
+        {
+            HandleMouseMovement();
+            HandleMouseZoom();
+        }
+        else
+        {
+            HandleTouchMovement();
+            HandlePinchZoom();
+        }
+
         ClampPosition();
     }
 
@@ -87,5 +96,25 @@ public class MobileCameraController : MonoBehaviour
         pos.z = Mathf.Clamp(pos.z, minZ, maxZ);
 
         transform.position = pos;
+    }
+
+    void HandleMouseMovement()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            float moveX = -Input.GetAxis("Mouse X") * moveSpeed * 100f;
+            float moveZ = -Input.GetAxis("Mouse Y") * moveSpeed * 100f;
+
+            transform.Translate(new Vector3(moveX, 0, moveZ), Space.World);
+        }
+    }
+    void HandleMouseZoom()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll != 0f)
+        {
+            Zoom(scroll * 100f);
+        }
     }
 }

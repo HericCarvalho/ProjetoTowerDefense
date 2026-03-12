@@ -5,12 +5,14 @@ public class Bullet : MonoBehaviour
     private Transform target;
 
     public float speed = 20f;
-
     public float damage = 50f;
 
-    public void Seek(Transform _target)
+    public GameObject ownerTower;
+
+    public void Seek(Transform _target, GameObject tower)
     {
         target = _target;
+        ownerTower = tower;
     }
 
     void Update()
@@ -41,6 +43,16 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
+
+            if (enemy.health <= 0)
+            {
+                EnemyXPReward xp = target.GetComponent<EnemyXPReward>();
+
+                if (xp != null)
+                {
+                    xp.GiveXP(ownerTower);
+                }
+            }
         }
 
         Destroy(gameObject);

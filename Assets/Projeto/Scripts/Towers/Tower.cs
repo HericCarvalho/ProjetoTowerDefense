@@ -73,7 +73,7 @@ public class Tower : MonoBehaviour
 
         if (bullet != null)
         {
-            bullet.Seek(target);
+            bullet.Seek(target, gameObject);
         }
     }
 }

@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static BuildManager instance;
+
+    public GameObject towerPrefab;
+
+    void Awake()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject GetTowerToBuild()
     {
-        
+        return towerPrefab;
     }
 }
