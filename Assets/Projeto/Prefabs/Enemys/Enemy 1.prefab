@@ -104,7 +104,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6513603302089294902}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6f394faecea059144a7094984a76507e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad17ca7be125ce34f8e2f9f9308d94a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 30
+  speed: 10
 --- !u!114 &4530984545550541514
 MonoBehaviour:
   m_ObjectHideFlags: 0
