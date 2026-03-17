@@ -1,20 +1,20 @@
-Publico Alvo: 15-35 anos, fãs de jogos de TD e estratégia, jogadores casuais e intermediários, pessoas que jogam todos os dias, pessoas com interesse em estética cyber punk.
+**Publico Alvo:** 15-35 anos, fãs de jogos de TD e estratégia, jogadores casuais e intermediários, pessoas que jogam todos os dias, pessoas com interesse em estética cyber punk.
 
 
 
-Momento de uso: durante pausas no dia como horário de almoço, intervalo de aulas ou enquanto aguarda numa fila. Outros momentos de uso incluem momentos de descanso ou enquanto relaxa do estresse diário.
+**Momento de uso**: durante pausas no dia como horário de almoço, intervalo de aulas ou enquanto aguarda numa fila. Outros momentos de uso incluem momentos de descanso ou enquanto relaxa do estresse diário.
 
 
 
-\*\*Análise de Concorrentes\*\*
+**Análise de Concorrentes**
 
 
 
-\*\*Concorrente 1:\*\* Bloons TD 6
+**Concorrente 1:** Bloons TD 6
 
 
 
-\*\*\_Visão geral\_\*\*
+_Visão geral_
 
 
 
@@ -22,7 +22,7 @@ Momento de uso: durante pausas no dia como horário de almoço, intervalo de aul
 
 
 
-\_Mecânicas principais\_
+_Mecânicas principais_
 
 
 
@@ -30,7 +30,7 @@ Posicionamento estratégico de torres ao redor do mapa, cada torre possui múlti
 
 
 
-\_Diferenciais\_
+_Diferenciais_
 
 
 
@@ -38,7 +38,7 @@ Grande variedade de torres e upgrades, alto nível de profundidade estratégica,
 
 
 
-\_Contribuição para o gênero\_
+_Contribuição para o gênero_
 
 
 
@@ -46,11 +46,11 @@ O jogo mostra como um tower defense pode ter grande profundidade estratégica e 
 
 
 
-\*\*Concorrente 2:\*\* Kingdom Rush
+**Concorrente 2:** Kingdom Rush
 
 
 
-\_Visão geral\_
+_Visão geral_
 
 
 
@@ -58,11 +58,11 @@ Tower defense ambientado em um mundo de fantasia medieval, onde o jogador deve i
 
 
 
-\_Mecânicas principais\_
+_Mecânicas principais_
 
 
 
-Construção de torres em locais pré-definidos no mapa.
+-Construção de torres em locais pré-definidos no mapa.
 
 
 
@@ -78,7 +78,7 @@ Sistema de heróis controláveis , uso de magias e habilidades globais.
 
 
 
-\_Diferenciais\_
+_Diferenciais_
 
 
 
@@ -86,7 +86,7 @@ Unidades melee que bloqueiam inimigos fisicamente, forte identidade visual carto
 
 
 
-\_Contribuição para o gênero\_
+_Contribuição para o gênero_
 
 
 
@@ -102,15 +102,15 @@ especialização de torres
 
 
 
-&#x20; mapas com pontos estratégicos.
+mapas com pontos estratégicos.
 
 
 
-\*\*Concorrente 3:\*\* Arknights
+**Concorrente 3:** Arknights
 
 
 
-\_Visão geral\_
+_Visão geral_
 
 
 
@@ -118,7 +118,7 @@ Tower defense ambientado em um mundo de fantasia medieval, onde o jogador deve i
 
 
 
-\_Mecânicas principais\_
+_Mecânicas principais_
 
 
 
@@ -126,7 +126,7 @@ Construção de torres em locais pré-definidos no mapa, quatro tipos básicos d
 
 
 
-\_Diferenciais\_
+_Diferenciais_
 
 
 
@@ -134,7 +134,7 @@ Unidades melee que bloqueiam inimigos fisicamente, forte identidade visual carto
 
 
 
-\_Contribuição para o gênero\_
+_Contribuição para o gênero_
 
 
 
@@ -142,9 +142,9 @@ A série consolidou várias convenções modernas do tower defense mobile, como:
 
 
 
-\-   heróis jogáveis
+  heróis jogáveis
 
-\-   especialização de torres
+  especialização de torres
 
-\-   mapas com pontos estratégicos.
+  mapas com pontos estratégicos.
 
