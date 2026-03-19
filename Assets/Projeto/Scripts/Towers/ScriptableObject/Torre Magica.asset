@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fcd5a253ffe27342b16d391f76452a5, type: 3}
-  m_Name: Torre 1
+  m_Name: Torre Magica
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: Torre 1
-  prefab: {fileID: 4819581756815739725, guid: 66b19210ec75ca047a77e49b8d25ab2d, type: 3}
-  range: 15
+  towerName: Torre Magica
+  prefab: {fileID: 4819581756815739725, guid: 2dc0b3c7baaae484bb611fd65e08f689, type: 3}
+  range: 10
   fireRate: 1
   damage: 50
-  costMoney: 20
+  costMoney: 70
   costRestos: 0
-  sellValue: 10
-  baseXPToLevel: 10
+  sellValue: 30
+  baseXPToLevel: 20
   nextUpgrade: {fileID: 0}
   upgradeCostMoney: 0
-  upgradeCostRestos: 0
+  upgradeCostRestos: 30

@@ -3,13 +3,15 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
-    private float health;
+    public float health;
 
     private GameObject prefabReference;
+
 
     void OnEnable()
     {
         health = maxHealth;
+
     }
 
     public void SetPrefabReference(GameObject prefab)
@@ -33,5 +35,10 @@ public class EnemyHealth : MonoBehaviour
             reward.GiveReward();
 
         ObjectPool.instance.ReturnObject(gameObject, prefabReference);
+
+    }
+    public GameObject GetPrefab()
+    {
+        return prefabReference;
     }
 }
