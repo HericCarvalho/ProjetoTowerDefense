@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour
     void OnEnable()
     {
         health = maxHealth;
-
+        EnemyManager.instance.RegisterEnemy(transform);
     }
 
     public void SetPrefabReference(GameObject prefab)
@@ -30,11 +30,13 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
+        EnemyManager.instance.UnregisterEnemy(transform);
+        ObjectPool.instance.ReturnObject(gameObject, prefabReference);
+        WaveManager.instance.RegisterEnemyDeath();
+
         EnemyReward reward = GetComponent<EnemyReward>();
         if (reward != null)
             reward.GiveReward();
-
-        ObjectPool.instance.ReturnObject(gameObject, prefabReference);
 
     }
     public GameObject GetPrefab()

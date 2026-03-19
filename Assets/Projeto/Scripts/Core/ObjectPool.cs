@@ -39,7 +39,13 @@ public class ObjectPool : MonoBehaviour
     }
     public void ReturnObject(GameObject obj, GameObject prefab)
     {
-        obj.transform.position = new Vector3(0, -1000, 0); 
+        if (obj == null || prefab == null)
+        {
+            Debug.LogError("ReturnObject recebeu NULL!");
+            return;
+        }
+
+        obj.transform.position = new Vector3(0, -1000, 0);
         obj.SetActive(false);
 
         if (!pools.ContainsKey(prefab))

@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public GameObject winPanel;
     public GameObject gameOverPanel;
 
     void Awake()
@@ -11,30 +13,39 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public void GameOver()
+    public void WinGame()
     {
-        Time.timeScale = 0f; // pausa o jogo
-        gameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+        winPanel.SetActive(true);
     }
 
-    public void RestartLevel()
+    public void GameOver()
     {
-        Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
-        );
+        Time.timeScale = 0f;
+        gameOverPanel.SetActive(true);
     }
 
     public void GoToMenu()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu");
     }
 
-    public void QuitGame()
+    public void NextLevel()
     {
-        Debug.Log("Saindo do jogo...");
+        Time.timeScale = 1f;
 
-        Application.Quit();
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextIndex = currentIndex + 1;
+
+        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextIndex);
+        }
+        else
+        {
+            Debug.Log("Última fase concluída!");
+            SceneManager.LoadScene("Menu");
+        }
     }
 }

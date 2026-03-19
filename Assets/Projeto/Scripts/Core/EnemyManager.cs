@@ -21,4 +21,9 @@ public class EnemyManager : MonoBehaviour
     {
         enemies.Remove(enemy);
     }
+
+    public int GetAliveEnemies()
+    {
+        return enemies.Count;
+    }
 }

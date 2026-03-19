@@ -5,9 +5,12 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 5f;
     private int waypointIndex = 0;
 
+    bool hasReachedEnd = false;
+
     void OnEnable()
     {
-        waypointIndex = 0; 
+        waypointIndex = 0;
+        hasReachedEnd = false;
     }
 
     void Update()
@@ -17,6 +20,9 @@ public class EnemyMovement : MonoBehaviour
 
     void Move()
     {
+        if (hasReachedEnd)
+            return;
+
         if (waypointIndex >= EnemyPath.instance.WaypointCount())
         {
             ReachEnd();
@@ -36,38 +42,23 @@ public class EnemyMovement : MonoBehaviour
 
     void ReachEnd()
     {
+        WaveManager.instance.RegisterEnemyDeath();
+
+        hasReachedEnd = true;
+
         if (BaseHealth.instance != null)
-        {
             BaseHealth.instance.TakeDamage(1);
-        }
-        else
-        {
-            Debug.LogError("BaseHealth.instance está NULL!");
-        }
 
         EnemyHealth eh = GetComponent<EnemyHealth>();
 
-        if (eh == null)
+        if (eh != null)
         {
-            Debug.LogError("EnemyHealth não encontrado!");
-            return;
-        }
+            GameObject prefab = eh.GetPrefab();
 
-        GameObject prefab = eh.GetPrefab();
-
-        if (prefab == null)
-        {
-            Debug.LogError("PrefabReference está NULL no EnemyHealth!");
-            return;
-        }
-
-        if (ObjectPool.instance != null)
-        {
-            ObjectPool.instance.ReturnObject(gameObject, prefab);
-        }
-        else
-        {
-            Debug.LogError("ObjectPool.instance está NULL!");
+            if (prefab != null && ObjectPool.instance != null)
+            {
+                ObjectPool.instance.ReturnObject(gameObject, prefab);
+            }
         }
     }
 
