@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject gameOverPanel;
 
+    public GameObject reviveHUD;
+
+    private bool isReviveOpen = false;
+
+
     void Awake()
     {
         instance = this;
@@ -47,5 +52,27 @@ public class GameManager : MonoBehaviour
             Debug.Log("Última fase concluída!");
             SceneManager.LoadScene("Menu");
         }
+    }
+    public void ToggleReviveHUD()
+    {
+        isReviveOpen = !isReviveOpen;
+
+        reviveHUD.SetActive(isReviveOpen);
+    }
+
+    public void OpenReviveHUD()
+    {
+        isReviveOpen = true;
+        reviveHUD.SetActive(true);
+    }
+    public void CloseReviveHUD()
+    {
+        isReviveOpen = false;
+        reviveHUD.SetActive(false);
+    }
+
+    public bool IsReviveOpen()
+    {
+        return isReviveOpen;
     }
 }

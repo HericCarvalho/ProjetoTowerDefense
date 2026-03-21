@@ -205,13 +205,9 @@ GameObject:
   - component: {fileID: 9066222554669970264}
   - component: {fileID: 2261400492443883423}
   - component: {fileID: 5163441495159617328}
-  - component: {fileID: 283838460089528564}
-  - component: {fileID: 4530984545550541514}
-  - component: {fileID: -3357186789315914303}
-  - component: {fileID: -3570986436703467219}
-  - component: {fileID: -92318919479706948}
+  - component: {fileID: 7546763897553224582}
   m_Layer: 0
-  m_Name: InimigoGenerico
+  m_Name: REVIVIDO_InimigoGenerico
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +307,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &283838460089528564
+--- !u!114 &7546763897553224582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -320,65 +316,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6513603302089294902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad17ca7be125ce34f8e2f9f9308d94a7, type: 3}
+  m_Script: {fileID: 11500000, guid: c8cac633037b90c46b97050d46d50bd4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 10
---- !u!114 &4530984545550541514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6513603302089294902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6269320897ed0064aa728347ad84453d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 100
-  health: 0
-  fragmentPrefab: {fileID: 6513603302089294902}
-  dropChance: 1
---- !u!114 &-3357186789315914303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6513603302089294902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2ae6b24b20be447bf56d7790d77eb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyReward
-  moneyReward: 10
-  restosReward: 2
---- !u!114 &-3570986436703467219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6513603302089294902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfd78b4bf455d0d4a9cc3e15eaddc304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyRegistration
---- !u!114 &-92318919479706948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6513603302089294902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc10413a636d1043ac7d766c6eb7dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyXPReward
-  xpReward: 5
+  m_EditorClassIdentifier: Assembly-CSharp::RevivedUnit
+  range: 3
+  speed: 4
 --- !u!1 &8865369280493187761
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public class EnemyHealth : MonoBehaviour
 
     private GameObject prefabReference;
 
+    public GameObject fragmentPrefab;
+    [Range(0f, 1f)] public float dropChance = 0.2f;
+
 
     void OnEnable()
     {
@@ -37,6 +40,10 @@ public class EnemyHealth : MonoBehaviour
         EnemyReward reward = GetComponent<EnemyReward>();
         if (reward != null)
             reward.GiveReward();
+        if (Random.value <= dropChance)
+        {
+            FragmentManager.instance.AddFragment(fragmentPrefab);
+        }
 
     }
     public GameObject GetPrefab()
