@@ -7,8 +7,14 @@ public class DamagePopup : MonoBehaviour
     public float moveSpeed = 2f;
     public float lifeTime = 1f;
 
+
     private float timer;
     private GameObject prefabReference;
+
+    void OnEnable()
+    {
+        timer = lifeTime;
+    }
 
     public void Setup(int damage, Color color, GameObject prefab)
     {
@@ -29,7 +35,6 @@ public class DamagePopup : MonoBehaviour
         {
             if (prefabReference == null)
             {
-                Debug.LogError("DamagePopup prefabReference está NULL!");
                 return;
             }
 

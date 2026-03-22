@@ -10,6 +10,20 @@ public class Bullet : MonoBehaviour
     public bool isMagicDamage;
     public bool isTrueDamage;
 
+    [Header("Effects Chance")]
+    public float burnChance;
+    public float slowChance;
+    public float stunChance;
+
+    [Header("Effects Power")]
+    public float burnDuration;
+    public float burnDPS;
+
+    public float slowDuration;
+    public float slowMultiplier;
+
+    public float stunDuration;
+
     public GameObject ownerTower;
     private GameObject prefabReference;
 
@@ -55,6 +69,19 @@ public class Bullet : MonoBehaviour
             {
                 tower.GainXP(1);
             }
+        }
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
+
+            if (Random.value <= burnChance)
+                enemy.ApplyBurn(burnDuration, burnDPS);
+
+            if (Random.value <= slowChance)
+                enemy.ApplySlow(slowDuration, slowMultiplier);
+
+            if (Random.value <= stunChance)
+                enemy.ApplyStun(stunDuration);
         }
 
         ReturnToPool();

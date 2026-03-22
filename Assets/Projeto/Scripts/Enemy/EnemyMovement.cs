@@ -6,6 +6,8 @@ public class EnemyMovement : MonoBehaviour
     private int waypointIndex = 0;
 
     bool hasReachedEnd = false;
+    private bool isInCombat = false;
+
 
     private EnemyHealth stats;
 
@@ -27,7 +29,11 @@ public class EnemyMovement : MonoBehaviour
 
     void Move()
     {
-        if (hasReachedEnd)
+
+        if (hasReachedEnd || isInCombat)
+            return;
+
+        if (stats.IsStunned())
             return;
 
         if (waypointIndex >= EnemyPath.instance.WaypointCount())
@@ -39,7 +45,10 @@ public class EnemyMovement : MonoBehaviour
         Transform target = EnemyPath.instance.GetWaypoint(waypointIndex);
 
         Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * stats.moveSpeed * Time.deltaTime, Space.World);
+
+        float speed = stats.moveSpeed * stats.GetSlowMultiplier();
+
+        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
 
         if (Vector3.Distance(transform.position, target.position) < 0.2f)
         {
@@ -72,5 +81,10 @@ public class EnemyMovement : MonoBehaviour
     public float GetProgress()
     {
         return waypointIndex;
+    }
+
+    public void SetCombat(bool value)
+    {
+        isInCombat = value;
     }
 }

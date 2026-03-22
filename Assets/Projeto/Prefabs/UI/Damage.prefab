@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamagePopup
   text: {fileID: 3107932180491268852}
-  moveSpeed: 2
-  lifeTime: 1
+  moveSpeed: 5
+  lifeTime: 0.5
 --- !u!1 &8731001020100588925
 GameObject:
   m_ObjectHideFlags: 0
