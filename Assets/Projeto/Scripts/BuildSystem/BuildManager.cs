@@ -21,7 +21,6 @@ public class BuildManager : MonoBehaviour
     {
         selectedTower = tower;
 
-        TowerPreview.instance.CreatePreview(tower.prefab);
     }
 
     public bool CanBuild()

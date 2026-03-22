@@ -7,6 +7,13 @@ public class EnemyMovement : MonoBehaviour
 
     bool hasReachedEnd = false;
 
+    private EnemyHealth stats;
+
+    void Awake()
+    {
+        stats = GetComponent<EnemyHealth>();
+    }
+
     void OnEnable()
     {
         waypointIndex = 0;
@@ -32,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
         Transform target = EnemyPath.instance.GetWaypoint(waypointIndex);
 
         Vector3 dir = target.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        transform.Translate(dir.normalized * stats.moveSpeed * Time.deltaTime, Space.World);
 
         if (Vector3.Distance(transform.position, target.position) < 0.2f)
         {

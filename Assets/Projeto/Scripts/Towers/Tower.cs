@@ -132,6 +132,9 @@ public class Tower : MonoBehaviour
 
         bullet.damage = stats.damage;
 
+        bullet.isMagicDamage = stats.isMagicDamage;
+        bullet.isTrueDamage = stats.isTrueDamage;
+
         bullet.Seek(target, gameObject, stats.bulletPrefab);
     }
 

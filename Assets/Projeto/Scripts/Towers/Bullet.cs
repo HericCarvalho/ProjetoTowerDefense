@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Transform target;
+    [Header("Stats")]
     public float speed = 20f;
     public float damage = 50f;
 
-    public GameObject ownerTower;
+    [Header("Damage Type")]
+    public bool isMagicDamage;
+    public bool isTrueDamage;
 
+    public GameObject ownerTower;
     private GameObject prefabReference;
 
+    Transform target;
     public void Seek(Transform _target, GameObject tower, GameObject prefab)
     {
         target = _target;
@@ -43,7 +47,7 @@ public class Bullet : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
 
             Tower tower = ownerTower.GetComponent<Tower>();
 

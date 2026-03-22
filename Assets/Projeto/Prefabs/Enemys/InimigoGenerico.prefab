@@ -134,7 +134,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -336,8 +336,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6269320897ed0064aa728347ad84453d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  damage: 10
+  attackSpeed: 1
+  moveSpeed: 5
   maxHealth: 100
-  health: 0
+  physicalResistance: 0.5
+  magicalResistance: 0.8
+  isRanged: 0
+  isMagical: 0
+  damagePopupPrefab: {fileID: 7579089163935683579, guid: c73f8fb0dbca6fe44b5add68a5a0be0d, type: 3}
   fragmentPrefab: {fileID: 6513603302089294902}
   dropChance: 1
 --- !u!114 &-3357186789315914303

@@ -9,6 +9,10 @@ public class TowerStats : MonoBehaviour
     public float fireRate;
     public float damage;
 
+    [Header("Damage Type")]
+    public bool isMagicDamage;
+    public bool isTrueDamage;
+
     [Header("Prefabs")]
     public GameObject bulletPrefab;
 
