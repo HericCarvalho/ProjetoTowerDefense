@@ -2,30 +2,49 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    #region === STATS ===
+
     [Header("Stats")]
+    public float maxHealth = 100f;
     public float damage = 5f;
     public float attackRate = 1f;
     public float attackRange = 1.5f;
     public float moveSpeed = 5f;
-    public float maxHealth = 100f;
+
+    #endregion
+
+    #region === RESISTANCES ===
 
     [Header("Resistances (0 a 1)")]
     [Range(0f, 1f)] public float physicalResistance;
     [Range(0f, 1f)] public float magicalResistance;
 
+    #endregion
+
+    #region === ATTACK TYPE ===
+
     [Header("Attack Type")]
     public bool isRanged;
     public bool isMagical;
 
-    [Header("Effects")]
+    #endregion
+
+    #region === EFFECTS STATE ===
+
     private bool isBurning;
     private float burnTimer;
     private float burnDamagePerSecond;
+
     private bool isSlowed;
     private float slowTimer;
     private float slowMultiplier = 1f;
-    public bool isStunned;
+
+    private bool isStunned;
     private float stunTimer;
+
+    #endregion
+
+    #region === EFFECT RESISTANCE & IMMUNITY ===
 
     [Header("Effect Resistances")]
     [Range(0f, 1f)] public float burnResistance;
@@ -37,28 +56,62 @@ public class EnemyHealth : MonoBehaviour
     public bool immuneToSlow;
     public bool immuneToStun;
 
+    #endregion
+
+    #region === VISUAL EFFECTS ===
+
     [Header("Visual Effects")]
     public GameObject burnEffect;
     public GameObject slowEffect;
     public GameObject stunEffect;
 
+    #endregion
+
+    #region === ECONOMY / META ===
+
     [Header("Fragment Drop")]
     public string enemyID;
     [Range(0f, 1f)] public float fragmentDropChance = 0.3f;
 
+    #endregion
+
+    #region === UI ===
+
     [Header("Damage Popup")]
     public GameObject damagePopupPrefab;
 
-    private float burnPopupTimer;
+    #endregion
+
+    #region === RUNTIME ===
+
     private float health;
     private float attackCooldown;
     private Transform combatTarget;
 
+    private float burnPopupTimer;
     private GameObject prefabReference;
 
+    #endregion
 
+    #region === UNITY EVENTS ===
 
     void OnEnable()
+    {
+        ResetState();
+        RegisterSystems();
+    }
+
+    void Update()
+    {
+        HandleEffects();
+        HandleCombat();
+    }
+
+    #endregion
+
+    #region === INITIALIZATION ===
+
+    void ResetState()
     {
         health = maxHealth;
 
@@ -69,53 +122,53 @@ public class EnemyHealth : MonoBehaviour
         if (burnEffect != null) burnEffect.SetActive(false);
         if (slowEffect != null) slowEffect.SetActive(false);
         if (stunEffect != null) stunEffect.SetActive(false);
-
-        EnemyManager.instance.RegisterEnemy(transform);
-    }
-    void Update()
-    {
-        HandleBurn();
-        HandleSlow();
-        HandleStun();
-        HandleCombat();
     }
 
-    public void SetPrefabReference(GameObject prefab)
+    void RegisterSystems()
     {
-        prefabReference = prefab;
+        if (EnemyManager.instance != null)
+            EnemyManager.instance.RegisterEnemy(transform);
+
+        if (EncyclopediaManager.instance != null && !string.IsNullOrEmpty(enemyID))
+            EncyclopediaManager.instance.Discover(enemyID);
     }
-    public float CurrentHealth => health;
+
+    #endregion
+
+    #region === DAMAGE SYSTEM ===
+
     public void TakeDamage(float amount, bool isMagicDamage, bool isTrueDamage = false)
     {
         float finalDamage = amount;
 
         if (!isTrueDamage)
         {
-            if (isMagicDamage)
-            {
-                finalDamage *= (1f - magicalResistance);
-            }
-            else
-            {
-                finalDamage *= (1f - physicalResistance);
-            }
-            ShowDamagePopup((int)finalDamage, isMagicDamage, isTrueDamage);
+            finalDamage *= isMagicDamage
+                ? (1f - magicalResistance)
+                : (1f - physicalResistance);
+
+            ShowDamagePopup((int)finalDamage, isMagicDamage, false);
         }
         else
         {
-
+            ShowDamagePopup((int)finalDamage, false, true);
         }
-
 
         health -= finalDamage;
 
         if (health <= 0)
             Die();
     }
+
+    #endregion
+
+    #region === COMBAT ===
+
     public void SetTarget(Transform target)
     {
         combatTarget = target;
     }
+
     void HandleCombat()
     {
         if (combatTarget == null)
@@ -133,52 +186,27 @@ public class EnemyHealth : MonoBehaviour
             RevivedUnit unit = combatTarget.GetComponent<RevivedUnit>();
 
             if (unit != null)
-            {
                 unit.TakeDamage(damage);
-            }
 
             attackCooldown = 1f / attackRate;
         }
     }
-    void Die()
+
+    #endregion
+
+    #region === EFFECT SYSTEM ===
+
+    void HandleEffects()
     {
-        EnemyManager.instance.UnregisterEnemy(transform);
-        ObjectPool.instance.ReturnObject(gameObject, prefabReference);
-        WaveManager.instance.RegisterEnemyDeath();
-
-        EnemyReward reward = GetComponent<EnemyReward>();
-        if (reward != null)
-            reward.GiveReward();
-
-        TryDropFragment();
+        HandleBurn();
+        HandleSlow();
+        HandleStun();
     }
-    void ShowDamagePopup(int damage, bool isMagic, bool isTrue, bool isBurn = false)
-    {
-        if (damagePopupPrefab == null) return;
 
-        GameObject popupGO = ObjectPool.instance.GetObject(damagePopupPrefab);
+    #endregion
 
-        popupGO.transform.position = transform.position + Vector3.up * 2f;
+    #region === BURN ===
 
-        DamagePopup popup = popupGO.GetComponent<DamagePopup>();
-
-        Color color = Color.white;
-
-        if (isBurn)
-            color = Color.red;
-        else if (isTrue)
-            color = Color.white;
-        else if (isMagic)
-            color = Color.blue;
-        else
-            color = Color.gray;
-
-        popup.Setup(damage, color, damagePopupPrefab);
-    }
-    public GameObject GetPrefab()
-    {
-        return prefabReference;
-    }
     void HandleBurn()
     {
         if (!isBurning) return;
@@ -198,27 +226,27 @@ public class EnemyHealth : MonoBehaviour
         if (burnTimer <= 0f)
         {
             isBurning = false;
-
-            if (burnEffect != null)
-                burnEffect.SetActive(false);
+            if (burnEffect != null) burnEffect.SetActive(false);
         }
     }
+
     public void ApplyBurn(float duration, float dps)
     {
         if (immuneToBurn) return;
 
-        float finalChance = 1f - burnResistance;
-
-        if (Random.value > finalChance)
-            return; 
+        if (Random.value > (1f - burnResistance))
+            return;
 
         isBurning = true;
         burnTimer = duration;
         burnDamagePerSecond = dps;
 
-        if (burnEffect != null)
-            burnEffect.SetActive(true);
+        if (burnEffect != null) burnEffect.SetActive(true);
     }
+
+    #endregion
+
+    #region === SLOW ===
 
     void HandleSlow()
     {
@@ -231,30 +259,32 @@ public class EnemyHealth : MonoBehaviour
             isSlowed = false;
             slowMultiplier = 1f;
 
-            if (slowEffect != null)
-                slowEffect.SetActive(false);
+            if (slowEffect != null) slowEffect.SetActive(false);
         }
     }
+
     public void ApplySlow(float duration, float multiplier)
     {
         if (immuneToSlow) return;
 
-        float finalChance = 1f - slowResistance;
-
-        if (Random.value > finalChance)
+        if (Random.value > (1f - slowResistance))
             return;
 
         isSlowed = true;
         slowTimer = duration;
         slowMultiplier = multiplier;
 
-        if (slowEffect != null)
-            slowEffect.SetActive(true);
+        if (slowEffect != null) slowEffect.SetActive(true);
     }
+
     public float GetSlowMultiplier()
     {
         return slowMultiplier;
     }
+
+    #endregion
+
+    #region === STUN ===
 
     void HandleStun()
     {
@@ -266,50 +296,116 @@ public class EnemyHealth : MonoBehaviour
         {
             isStunned = false;
 
-            if (stunEffect != null)
-                stunEffect.SetActive(false);
+            if (stunEffect != null) stunEffect.SetActive(false);
         }
     }
+
     public void ApplyStun(float duration)
     {
         if (immuneToStun) return;
 
-        float finalChance = 1f - stunResistance;
-
-        if (Random.value > finalChance)
+        if (Random.value > (1f - stunResistance))
             return;
 
         isStunned = true;
         stunTimer = duration;
 
-        if (stunEffect != null)
-            stunEffect.SetActive(true);
+        if (stunEffect != null) stunEffect.SetActive(true);
     }
+
     public bool IsStunned()
     {
         return isStunned;
     }
 
-    void TryDropFragment()
+    #endregion
+
+    #region === UI ===
+
+    void ShowDamagePopup(int damage, bool isMagic, bool isTrue, bool isBurn = false)
     {
-        if (string.IsNullOrEmpty(enemyID))
-        {
-            Debug.LogWarning("Enemy sem enemyID!");
+        if (damagePopupPrefab == null || ObjectPool.instance == null)
             return;
-        }
 
-        float roll = Random.value;
+        GameObject popupGO = ObjectPool.instance.GetObject(damagePopupPrefab);
+        popupGO.transform.position = transform.position + Vector3.up * 2f;
 
-        if (roll <= fragmentDropChance)
+        DamagePopup popup = popupGO.GetComponent<DamagePopup>();
+
+        Color color = Color.gray;
+
+        if (isBurn) color = Color.red;
+        else if (isTrue) color = Color.white;
+        else if (isMagic) color = Color.blue;
+
+        popup.Setup(damage, color, damagePopupPrefab);
+    }
+
+    #endregion
+
+    #region === DEATH ===
+
+    void Die()
+    {
+        if (EnemyManager.instance != null)
+            EnemyManager.instance.UnregisterEnemy(transform);
+
+        if (WaveManager.instance != null)
+            WaveManager.instance.RegisterEnemyDeath();
+
+        if (EncyclopediaManager.instance != null)
+            EncyclopediaManager.instance.RegisterKill(enemyID);
+
+        EnemyReward reward = GetComponent<EnemyReward>();
+        if (reward != null)
+            reward.GiveReward();
+
+        TryDropFragment();
+
+        if (ObjectPool.instance != null && prefabReference != null)
         {
-            FragmentManager.instance.AddFragment(enemyID);
-
-            Debug.Log($"DROP! {enemyID} ({roll})");
+            ObjectPool.instance.ReturnObject(gameObject, prefabReference);
         }
         else
         {
-            Debug.Log($"No Drop {enemyID} ({roll})");
+            Debug.LogError("PrefabReference NULL no EnemyHealth!");
+            gameObject.SetActive(false);
         }
     }
 
+    #endregion
+
+    #region === DROP SYSTEM ===
+
+    void TryDropFragment()
+    {
+        if (FragmentManager.instance == null)
+            return;
+
+        if (string.IsNullOrEmpty(enemyID))
+            return;
+
+        if (Random.value <= fragmentDropChance)
+        {
+            FragmentManager.instance.AddFragment(enemyID);
+        }
+    }
+
+    #endregion
+
+    #region === HELPERS ===
+
+    public float CurrentHealth => health;
+
+    public void SetPrefabReference(GameObject prefab)
+    {
+        prefabReference = prefab;
+    }
+
+    public GameObject GetPrefab()
+    {
+        return prefabReference;
+    }
+
+    #endregion
 }

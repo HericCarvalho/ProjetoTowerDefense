@@ -155,11 +155,9 @@ public class Tower : MonoBehaviour
 
         xpToNextLevel = Mathf.RoundToInt(xpToNextLevel * 1.5f);
 
-        Debug.Log("Tower Level Up: " + level);
 
         if (level % 5 == 0)
         {
-            Debug.Log("Evolution Available!");
         }
     }
 }

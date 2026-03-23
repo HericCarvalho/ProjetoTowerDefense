@@ -31,7 +31,6 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Debug.Log("Hit: " + hit.collider.name);
 
             BuildNode node = hit.collider.GetComponentInParent<BuildNode>();
 

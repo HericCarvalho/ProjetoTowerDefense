@@ -19,7 +19,6 @@ public class FragmentManager : MonoBehaviour
 
         fragments[enemyID]++;
 
-        Debug.Log($"Fragmento de {enemyID}: {fragments[enemyID]}");
     }
 
     public int GetFragments(string enemyID)
