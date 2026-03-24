@@ -26,8 +26,14 @@ public class Tower : MonoBehaviour
     public int currentXP = 0;
     public int xpToNextLevel;
 
+    [Header("Attack Type")]
+    public bool useEarthquake;
+
+    private EarthquakeAttack earthquake;
+
     void Start()
     {
+        earthquake = GetComponent<EarthquakeAttack>();
         stats = GetComponent<TowerStats>();
         xpToNextLevel = stats.data.baseXPToLevel;
     }
@@ -121,8 +127,15 @@ public class Tower : MonoBehaviour
         target = bestTarget;
     }
 
+
     void Shoot()
     {
+        if (useEarthquake && earthquake != null)
+        {
+            earthquake.Execute(transform.position);
+            return;
+        }
+
         GameObject bulletGO = ObjectPool.instance.GetObject(stats.bulletPrefab);
 
         bulletGO.transform.position = firePoint.position;
@@ -131,7 +144,6 @@ public class Tower : MonoBehaviour
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         bullet.damage = stats.damage;
-
         bullet.isMagicDamage = stats.isMagicDamage;
         bullet.isTrueDamage = stats.isTrueDamage;
 

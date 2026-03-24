@@ -518,6 +518,7 @@ MonoBehaviour:
   level: 1
   currentXP: 0
   xpToNextLevel: 0
+  useEarthquake: 0
 --- !u!114 &7457922965201104589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,8 +551,8 @@ MonoBehaviour:
   fireRate: 0
   damage: 0
   isMagicDamage: 0
-  isTrueDamage: 0
-  bulletPrefab: {fileID: 8214901827094675342, guid: 7342503abae30b54ca8fb488e81efac1, type: 3}
+  isTrueDamage: 1
+  bulletPrefab: {fileID: 8214901827094675342, guid: 0c71fa2ebd3b7364f950526b2d834f77, type: 3}
 --- !u!1 &5040679397331896724
 GameObject:
   m_ObjectHideFlags: 0

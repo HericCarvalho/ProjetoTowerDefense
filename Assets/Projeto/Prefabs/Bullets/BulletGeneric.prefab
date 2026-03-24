@@ -125,5 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e29e2d0e4176344b0cc63316264399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  speed: 20
-  damage: 50
+  speed: 30
+  damage: 60
+  isMagicDamage: 0
+  isTrueDamage: 1
+  burnChance: 0
+  slowChance: 0
+  stunChance: 0
+  burnDuration: 0
+  burnDPS: 0
+  slowDuration: 0
+  slowMultiplier: 0
+  stunDuration: 0
+  ownerTower: {fileID: 0}

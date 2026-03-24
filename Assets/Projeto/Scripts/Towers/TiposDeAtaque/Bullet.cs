@@ -63,17 +63,6 @@ public class Bullet : MonoBehaviour
         {
             enemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
 
-            Tower tower = ownerTower.GetComponent<Tower>();
-
-            if (tower != null)
-            {
-                tower.GainXP(1);
-            }
-        }
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
-
             if (Random.value <= burnChance)
                 enemy.ApplyBurn(burnDuration, burnDPS);
 
@@ -82,6 +71,10 @@ public class Bullet : MonoBehaviour
 
             if (Random.value <= stunChance)
                 enemy.ApplyStun(stunDuration);
+
+            Tower tower = ownerTower.GetComponent<Tower>();
+            if (tower != null)
+                tower.GainXP(1);
         }
 
         ReturnToPool();
