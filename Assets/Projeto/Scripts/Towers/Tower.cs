@@ -1,41 +1,38 @@
 using UnityEngine;
 
-public enum TargetMode
+public enum AttackType
 {
-    First,
-    Last,
-    Closest,
-    Strongest
+    Projectile,
+    Laser,
+    Earthquake
 }
 
 public class Tower : MonoBehaviour
 {
-    public TowerStats stats;
-
-    public string enemyTag = "Enemy";
+    public TowerData data;
 
     public Transform firePoint;
     public Transform target;
 
-    public TargetMode targetMode = TargetMode.First;
+    public GameObject bulletPrefab;
+
+    public AttackType attackType;
 
     float fireCountdown = 0f;
 
-    [Header("XP")]
     public int level = 1;
     public int currentXP = 0;
     public int xpToNextLevel;
 
-    [Header("Attack Type")]
-    public bool useEarthquake;
+    public int upgradePoints = 0;
 
-    private EarthquakeAttack earthquake;
+    float bonusDamage;
+    float bonusRange;
+    float bonusFireRate;
 
     void Start()
     {
-        earthquake = GetComponent<EarthquakeAttack>();
-        stats = GetComponent<TowerStats>();
-        xpToNextLevel = stats.data.baseXPToLevel;
+        xpToNextLevel = data.baseXPToLevel;
     }
 
     void Update()
@@ -48,106 +45,95 @@ public class Tower : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, target.position);
 
-        if (distance > stats.range)
+        if (distance > GetRange())
         {
             target = null;
+            return;
+        }
+
+        if (attackType == AttackType.Laser)
+        {
+            LaserAttack();
             return;
         }
 
         if (fireCountdown <= 0f)
         {
             Shoot();
-            fireCountdown = 1f / stats.fireRate;
+            fireCountdown = 1f / GetFireRate();
         }
 
         fireCountdown -= Time.deltaTime;
     }
 
-    void FindTarget()
-    {
-        Transform bestTarget = null;
-        float bestValue = 0f;
-
-        foreach (Transform enemy in EnemyManager.instance.enemies)
-        {
-            if (!enemy.gameObject.activeInHierarchy)
-                continue; 
-
-            float distance = Vector3.Distance(transform.position, enemy.position);
-            if (distance > stats.range)
-                continue;
-
-            EnemyMovement movement = enemy.GetComponent<EnemyMovement>();
-            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
-            if (movement == null || health == null)
-                continue;
-
-            float value = 0f;
-
-            switch (targetMode)
-            {
-                case TargetMode.First:
-                    value = movement.GetProgress();
-                    if (bestTarget == null || value > bestValue)
-                    {
-                        bestValue = value;
-                        bestTarget = enemy;
-                    }
-                    break;
-
-                case TargetMode.Last:
-                    value = movement.GetProgress();
-                    if (bestTarget == null || value < bestValue)
-                    {
-                        bestValue = value;
-                        bestTarget = enemy;
-                    }
-                    break;
-
-                case TargetMode.Closest:
-                    value = distance;
-                    if (bestTarget == null || value < bestValue || bestTarget == null)
-                    {
-                        bestValue = value;
-                        bestTarget = enemy;
-                    }
-                    break;
-
-                case TargetMode.Strongest:
-                    value = health.CurrentHealth;
-                    if (bestTarget == null || value > bestValue)
-                    {
-                        bestValue = value;
-                        bestTarget = enemy;
-                    }
-                    break;
-            }
-        }
-
-        target = bestTarget;
-    }
-
-
     void Shoot()
     {
-        if (useEarthquake && earthquake != null)
-        {
-            earthquake.Execute(transform.position);
-            return;
-        }
+        if (attackType == AttackType.Projectile)
+            ProjectileAttack();
 
-        GameObject bulletGO = ObjectPool.instance.GetObject(stats.bulletPrefab);
+        if (attackType == AttackType.Earthquake)
+            EarthquakeAttack();
+    }
+
+    void ProjectileAttack()
+    {
+        GameObject bulletGO = ObjectPool.instance.GetObject(bulletPrefab);
 
         bulletGO.transform.position = firePoint.position;
         bulletGO.transform.rotation = firePoint.rotation;
 
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
-        bullet.damage = stats.damage;
-        bullet.isMagicDamage = stats.isMagicDamage;
-        bullet.isTrueDamage = stats.isTrueDamage;
+        bullet.Seek(target, gameObject, bulletPrefab);
 
-        bullet.Seek(target, gameObject, stats.bulletPrefab);
+        bullet.damage += GetBonusDamage();
+    }
+
+    void LaserAttack()
+    {
+        if (target == null) return;
+
+        EnemyHealth enemy = target.GetComponent<EnemyHealth>();
+        if (enemy == null) return;
+
+        float damage = GetBonusDamage() * Time.deltaTime;
+
+        enemy.TakeDamage(damage, false, false);
+    }
+
+    void EarthquakeAttack()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, 3f);
+
+        foreach (Collider col in hits)
+        {
+            EnemyHealth enemy = col.GetComponent<EnemyHealth>();
+            if (enemy == null) continue;
+
+            enemy.TakeDamage(GetBonusDamage(), false, false);
+        }
+    }
+
+    void FindTarget()
+    {
+        Transform bestTarget = null;
+        float shortestDistance = Mathf.Infinity;
+
+        foreach (Transform enemy in EnemyManager.instance.enemies)
+        {
+            if (!enemy.gameObject.activeInHierarchy)
+                continue;
+
+            float distance = Vector3.Distance(transform.position, enemy.position);
+
+            if (distance < shortestDistance && distance <= GetRange())
+            {
+                shortestDistance = distance;
+                bestTarget = enemy;
+            }
+        }
+
+        target = bestTarget;
     }
 
     public void GainXP(int amount)
@@ -167,9 +153,91 @@ public class Tower : MonoBehaviour
 
         xpToNextLevel = Mathf.RoundToInt(xpToNextLevel * 1.5f);
 
+        upgradePoints++;
+    }
 
-        if (level % 5 == 0)
-        {
-        }
+    public float GetRange()
+    {
+        return data.baseRange + (data.rangePerLevel * (level - 1)) + bonusRange;
+    }
+
+    public float GetFireRate()
+    {
+        return data.baseFireRate + (data.fireRatePerLevel * (level - 1)) + bonusFireRate;
+    }
+
+    public float GetBonusDamage()
+    {
+        return bonusDamage;
+    }
+
+    public void AddDamage(float amount)
+    {
+        bonusDamage += amount;
+    }
+
+    public void AddRange(float amount)
+    {
+        bonusRange += amount;
+    }
+
+    public void AddFireRate(float amount)
+    {
+        bonusFireRate += amount;
+    }
+
+    public void TryEvolve()
+    {
+        if (level < 5) return;
+        if (data.nextUpgrade == null) return;
+
+        int cost = 20;
+
+        if (!PlayerResources.instance.CanAfford(0, cost))
+            return;
+
+        PlayerResources.instance.Spend(0, cost);
+
+        Instantiate(data.nextUpgrade.prefab, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+    public void UpgradeDamage(float amount)
+    {
+        if (upgradePoints <= 0) return;
+
+        bonusDamage += amount;
+        upgradePoints--;
+    }
+
+    public void UpgradeRange(float amount)
+    {
+        if (upgradePoints <= 0) return;
+
+        bonusRange += amount;
+        upgradePoints--;
+    }
+
+    public void UpgradeFireRate(float amount)
+    {
+        if (upgradePoints <= 0) return;
+
+        bonusFireRate += amount;
+        upgradePoints--;
+    }
+    public void Transmute(TowerData option)
+    {
+        if (level < 10) return;
+        if (option == null) return;
+
+        Instantiate(option.prefab, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+    public void Sell()
+    {
+
+    }
+    public void OnSelected()
+    {
+        TowerUIManager.instance.SelectTower(this);
     }
 }

@@ -32,4 +32,9 @@ public class BuildMenuUI : MonoBehaviour
     {
         return currentNode;
     }
+    public void OnTowerButton(TowerData data)
+    {
+        BuildManager.instance.SelectTower(data);
+        CloseMenu();
+    }
 }

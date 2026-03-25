@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Torre Artilharia
   prefab: {fileID: 4819581756815739725, guid: 66b19210ec75ca047a77e49b8d25ab2d, type: 3}
-  range: 20
-  fireRate: 3
-  damage: 10
+  baseRange: 20
+  baseFireRate: 2
+  rangePerLevel: 0.5
+  fireRatePerLevel: 0.1
+  baseXPToLevel: 10
+  baseUpgradeCost: 5
+  costMultiplier: 1.5
   costMoney: 20
   costRestos: 0
-  sellValue: 10
-  baseXPToLevel: 10
-  nextUpgrade: {fileID: 0}
   upgradeCostMoney: 0
   upgradeCostRestos: 10
+  sellValue: 10
+  nextUpgrade: {fileID: 0}

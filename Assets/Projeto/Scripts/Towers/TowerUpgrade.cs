@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class TowerUpgrade : MonoBehaviour
 {
-    TowerStats stats;
+    private Tower tower;
 
     void Awake()
     {
-        stats = GetComponent<TowerStats>();
+        tower = GetComponent<Tower>();
     }
 
     public void Upgrade()
     {
-        if (stats.data.nextUpgrade == null)
-            return;
+        if (tower == null) return;
+        if (tower.data == null) return;
+        if (tower.data.nextUpgrade == null) return;
 
-        TowerData next = stats.data.nextUpgrade;
+        TowerData next = tower.data.nextUpgrade;
 
         if (!PlayerResources.instance.CanAfford(next.upgradeCostMoney, next.upgradeCostRestos))
             return;
@@ -28,7 +29,9 @@ public class TowerUpgrade : MonoBehaviour
 
     public void Sell()
     {
-        PlayerResources.instance.AddMoney(stats.data.sellValue);
+        if (tower == null || tower.data == null) return;
+
+        PlayerResources.instance.AddMoney(tower.data.sellValue);
 
         Destroy(gameObject);
     }

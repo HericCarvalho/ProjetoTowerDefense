@@ -15,6 +15,8 @@ public class BuildManager : MonoBehaviour
         }
 
         instance = this;
+
+        selectedTower = null;
     }
 
     public void SelectTower(TowerData tower)

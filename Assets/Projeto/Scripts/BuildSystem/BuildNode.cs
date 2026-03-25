@@ -9,13 +9,16 @@ public class BuildNode : MonoBehaviour
         if (tower != null)
             return;
 
-        if (!PlayerResources.instance.CanAfford(data.costMoney, data.costRestos))
-        {
+        if (!PlayerResources.instance.CanAfford(data.costMoney, 0))
             return;
-        }
 
-        PlayerResources.instance.Spend(data.costMoney, data.costRestos);
+        PlayerResources.instance.Spend(data.costMoney, 0);
 
         tower = Instantiate(data.prefab, transform.position, Quaternion.identity);
+    }
+
+    public bool HasTower()
+    {
+        return tower != null;
     }
 }

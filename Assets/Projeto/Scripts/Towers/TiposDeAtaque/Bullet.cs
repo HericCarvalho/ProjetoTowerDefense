@@ -24,17 +24,30 @@ public class Bullet : MonoBehaviour
 
     public float stunDuration;
 
-    public GameObject ownerTower;
-    private GameObject prefabReference;
+    private Transform target;
+    private EnemyHealth cachedEnemy;
 
-    Transform target;
+    private GameObject prefabReference;
+    private Tower ownerTower;
+
     public void Seek(Transform _target, GameObject tower, GameObject prefab)
     {
         target = _target;
-        ownerTower = tower;
         prefabReference = prefab;
+
+        if (_target != null)
+            cachedEnemy = _target.GetComponent<EnemyHealth>();
+
+        if (tower != null)
+            ownerTower = tower.GetComponent<Tower>();
     }
 
+    void OnEnable()
+    {
+        cachedEnemy = null;
+        target = null;
+        ownerTower = null;
+    }
     void Update()
     {
         if (target == null)
@@ -54,27 +67,23 @@ public class Bullet : MonoBehaviour
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
-
     void HitTarget()
     {
-        EnemyHealth enemy = target.GetComponent<EnemyHealth>();
-
-        if (enemy != null)
+        if (cachedEnemy != null)
         {
-            enemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
+            cachedEnemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
 
             if (Random.value <= burnChance)
-                enemy.ApplyBurn(burnDuration, burnDPS);
+                cachedEnemy.ApplyBurn(burnDuration, burnDPS);
 
             if (Random.value <= slowChance)
-                enemy.ApplySlow(slowDuration, slowMultiplier);
+                cachedEnemy.ApplySlow(slowDuration, slowMultiplier);
 
             if (Random.value <= stunChance)
-                enemy.ApplyStun(stunDuration);
+                cachedEnemy.ApplyStun(stunDuration);
 
-            Tower tower = ownerTower.GetComponent<Tower>();
-            if (tower != null)
-                tower.GainXP(1);
+            if (ownerTower != null)
+                ownerTower.GainXP(1);
         }
 
         ReturnToPool();
@@ -82,6 +91,13 @@ public class Bullet : MonoBehaviour
 
     void ReturnToPool()
     {
+        if (prefabReference == null)
+        {
+            Debug.LogWarning("Bullet sem prefabReference!");
+            gameObject.SetActive(false);
+            return;
+        }
+
         ObjectPool.instance.ReturnObject(gameObject, prefabReference);
     }
 }
