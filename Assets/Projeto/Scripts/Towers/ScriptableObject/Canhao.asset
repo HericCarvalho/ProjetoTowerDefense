@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: "Canh\xE3o"
   prefab: {fileID: 5087429130691917703, guid: be6555c8b73a1a44bb109c90b377aff5, type: 3}
-  baseRange: 10
-  baseFireRate: 1
+  baseRange: 30
+  baseFireRate: 0.6
   rangePerLevel: 0.5
   fireRatePerLevel: 0.1
   baseXPToLevel: 10
@@ -29,4 +29,4 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   transmuteOptionA: {fileID: 0}
   transmuteOptionB: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9f16ab8118b1dc04d925d570085324a4, type: 3}
