@@ -17,10 +17,12 @@ public class Tower : MonoBehaviour
     public Transform target;
 
     public GameObject bulletPrefab;
+    public GameObject rangeIndicator;
 
     public AttackType attackType;
 
     float fireCountdown = 0f;
+
 
     public int level = 1;
     public int currentXP = 0;
@@ -263,5 +265,22 @@ public class Tower : MonoBehaviour
             lookRotation,
             rotationSpeed * Time.deltaTime
         );
+    }
+    public void ShowRange()
+    {
+        if (rangeIndicator == null) return;
+
+        rangeIndicator.SetActive(true);
+
+        float range = GetRange();
+
+        rangeIndicator.transform.localScale = new Vector3(range * 2, 1, range * 2);
+    }
+
+    public void HideRange()
+    {
+        if (rangeIndicator == null) return;
+
+        rangeIndicator.SetActive(false);
     }
 }

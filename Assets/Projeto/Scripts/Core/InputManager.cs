@@ -30,16 +30,26 @@ public class InputManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
 
         if (!Physics.Raycast(ray, out RaycastHit hit))
+        {
+            TowerUIManager.instance.Close(); 
             return;
+        }
+
 
         BuildNode node = hit.collider.GetComponentInParent<BuildNode>();
         Tower tower = hit.collider.GetComponentInParent<Tower>();
+
+        if (tower != null)
+        {
+            TowerUIManager.instance.SelectTower(tower);
+            return;
+        }
 
         if (BuildManager.instance.CanBuild())
         {
             if (node != null && !node.HasTower())
             {
-                if (BuildManager.instance.selectedTower != null) 
+                if (BuildManager.instance.selectedTower != null)
                 {
                     node.BuildTower(BuildManager.instance.selectedTower);
                     BuildManager.instance.CancelBuild();
@@ -56,17 +66,9 @@ public class InputManager : MonoBehaviour
                 BuildMenuUI.instance.OpenMenu(node);
                 return;
             }
-
-            if (node.HasTower())
-            {
-                Tower nodeTower = node.tower.GetComponent<Tower>();
-                if (nodeTower != null)
-                {
-                    nodeTower.OnSelected();
-                    return;
-                }
-            }
         }
+
+        TowerUIManager.instance.Close();
     }
 
     bool IsPointerOverUI()

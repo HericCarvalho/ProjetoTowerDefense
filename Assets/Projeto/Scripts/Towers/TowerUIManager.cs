@@ -32,9 +32,15 @@ public class TowerUIManager : MonoBehaviour
 
     public void SelectTower(Tower tower)
     {
+        if (currentTower != null)
+            currentTower.HideRange();
+
         currentTower = tower;
+
         panel.SetActive(true);
         UpdateUI();
+
+        currentTower.ShowRange();
     }
 
     void Update()
@@ -88,6 +94,9 @@ public class TowerUIManager : MonoBehaviour
 
     public void Close()
     {
+        if (currentTower != null)
+            currentTower.HideRange();
+
         panel.SetActive(false);
         currentTower = null;
     }

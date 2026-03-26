@@ -5,28 +5,29 @@ public class EnemyHealthBar : MonoBehaviour
 {
     public Image fillImage;
 
-    private Transform target;
-    private Camera cam;
-
+    private Transform cam;
     private EnemyHealth health;
 
     public Vector3 offset = new Vector3(0, 2f, 0);
 
     void Start()
     {
-        cam = Camera.main;
-        target = transform.parent;
-        health = target.GetComponent<EnemyHealth>();
+        cam = Camera.main.transform;
+        health = GetComponentInParent<EnemyHealth>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        if (target == null) return;
+        if (health == null) return;
 
-        transform.position = target.position + offset;
+        transform.localPosition = offset;
 
-        transform.forward = cam.transform.forward;
+        transform.LookAt(cam);
+        transform.Rotate(0, 180, 0);
 
-        fillImage.fillAmount = health.CurrentHealth / health.maxHealth;
+        float value = health.CurrentHealth / health.maxHealth;
+        fillImage.fillAmount = value;
+
+        fillImage.enabled = value < 0.99f;
     }
 }

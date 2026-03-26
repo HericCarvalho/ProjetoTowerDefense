@@ -24,6 +24,8 @@ public class Bullet : MonoBehaviour
 
     public float stunDuration;
 
+    float baseDamage;
+
     private Transform target;
     private EnemyHealth cachedEnemy;
 
@@ -42,8 +44,14 @@ public class Bullet : MonoBehaviour
             ownerTower = tower.GetComponent<Tower>();
     }
 
+    void Awake()
+    {
+        baseDamage = damage;
+    }
+
     void OnEnable()
     {
+        damage = baseDamage;
         cachedEnemy = null;
         target = null;
         ownerTower = null;
