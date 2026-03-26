@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Torre Balista
   prefab: {fileID: 1950933338013717121, guid: 3d346523b2d1e8a45a494ef5df69866e, type: 3}
-  baseRange: 30
+  baseRange: 35
   baseFireRate: 1
   rangePerLevel: 2
   fireRatePerLevel: 0.1
@@ -29,4 +29,4 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   transmuteOptionA: {fileID: 0}
   transmuteOptionB: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4f1457e71b1813e4e95adf1897019da0, type: 3}
