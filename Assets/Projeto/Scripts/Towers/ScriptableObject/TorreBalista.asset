@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fcd5a253ffe27342b16d391f76452a5, type: 3}
-  m_Name: Torre Artilharia
+  m_Name: TorreBalista
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: Torre Artilharia
-  prefab: {fileID: 4819581756815739725, guid: 66b19210ec75ca047a77e49b8d25ab2d, type: 3}
-  baseRange: 20
-  baseFireRate: 2
-  rangePerLevel: 0.5
+  towerName: Torre Balista
+  prefab: {fileID: 1950933338013717121, guid: 3d346523b2d1e8a45a494ef5df69866e, type: 3}
+  baseRange: 30
+  baseFireRate: 1
+  rangePerLevel: 2
   fireRatePerLevel: 0.1
   baseXPToLevel: 10
   baseUpgradeCost: 5
   costMultiplier: 1.5
-  costMoney: 20
+  costMoney: 40
   costRestos: 0
   upgradeCostMoney: 0
-  upgradeCostRestos: 10
+  upgradeCostRestos: 20
   sellValue: 10
   nextUpgrade: {fileID: 0}
+  transmuteOptionA: {fileID: 0}
+  transmuteOptionB: {fileID: 0}
+  icon: {fileID: 0}

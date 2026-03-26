@@ -11,6 +11,8 @@ public class Tower : MonoBehaviour
 {
     public TowerData data;
 
+    public Transform head;
+    public float rotationSpeed = 10f; 
     public Transform firePoint;
     public Transform target;
 
@@ -42,6 +44,8 @@ public class Tower : MonoBehaviour
             FindTarget();
             return;
         }
+
+        RotateTowardsTarget();
 
         float distance = Vector3.Distance(transform.position, target.position);
 
@@ -239,5 +243,25 @@ public class Tower : MonoBehaviour
     public void OnSelected()
     {
         TowerUIManager.instance.SelectTower(this);
+    }
+    void RotateTowardsTarget()
+    {
+        if (target == null || head == null)
+            return;
+
+        Vector3 direction = target.position - head.position;
+
+        direction.y = 0f;
+
+        if (direction == Vector3.zero)
+            return;
+
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        head.rotation = Quaternion.Lerp(
+            head.rotation,
+            lookRotation,
+            rotationSpeed * Time.deltaTime
+        );
     }
 }

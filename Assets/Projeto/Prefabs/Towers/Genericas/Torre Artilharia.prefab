@@ -511,7 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5524c9f066c84445833d7c2c6a7e69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
-  data: {fileID: 11400000, guid: bbb9d06d32e4df245a26a7283e24a644, type: 2}
+  data: {fileID: 0}
   firePoint: {fileID: 6767504342111985688}
   target: {fileID: 0}
   bulletPrefab: {fileID: 8214901827094675342, guid: 0c71fa2ebd3b7364f950526b2d834f77, type: 3}
