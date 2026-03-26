@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fcd5a253ffe27342b16d391f76452a5, type: 3}
-  m_Name: Torre Magica
+  m_Name: Balista
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: Torre Magica
-  prefab: {fileID: 5184985285528276024, guid: 80e933f3d221c404ea6ecc0c248409a9, type: 3}
-  baseRange: 15
+  towerName: Balista
+  prefab: {fileID: 8598226327286807165, guid: 5b6d666d72f83bd4ab2ceb8f591cc127, type: 3}
+  baseRange: 20
   baseFireRate: 1
   rangePerLevel: 0.5
   fireRatePerLevel: 0.1
-  baseXPToLevel: 20
+  baseXPToLevel: 10
   baseUpgradeCost: 5
   costMultiplier: 1.5
-  costMoney: 70
+  costMoney: 20
   costRestos: 0
   upgradeCostMoney: 0
-  upgradeCostRestos: 30
-  sellValue: 30
+  upgradeCostRestos: 10
+  sellValue: 7
   nextUpgrade: {fileID: 0}
   transmuteOptionA: {fileID: 0}
   transmuteOptionB: {fileID: 0}
