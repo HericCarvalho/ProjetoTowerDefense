@@ -630,6 +630,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78898a995f1259b40bfd52241a4b47d3, type: 3}
+--- !u!1001 &6495094361814420885
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3884210169156258781, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4525114378602600807, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688077270001998465, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.06045183
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.454937
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107255367678219495, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8919679645820292701, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
+      propertyPath: m_Name
+      value: TorreTerremoto
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -639,3 +708,4 @@ SceneRoots:
   - {fileID: 578562250}
   - {fileID: 1884251535}
   - {fileID: 3649391111240885204}
+  - {fileID: 6495094361814420885}

@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f655ef9e217f454faf4fb48cc18eb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
-  gameSceneName: ScenaTeste
+  gameSceneName: ScenaTesteOriginal
   mainPanel: {fileID: 1247600287}
   optionsPanel: {fileID: 1944914}
   creditsPanel: {fileID: 439355504}
