@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 4757375465078864026}
   - component: {fileID: 7630153555858893013}
   - component: {fileID: 8715079260152472069}
+  - component: {fileID: 3935844579204813668}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -446,6 +447,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3935844579204813668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453888741351421153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a0d1683a2ae8a43a81445080dd3e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUI
+  towerXP: {fileID: 8302503995681092968}
+  xpBar: {fileID: 5462330806185073194}
+  levelText: {fileID: 3297077230601499802}
 --- !u!1 &8585655496406320295
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,9 +759,6 @@ PrefabInstance:
       addedObject: {fileID: 8302503995681092968}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7734748692436588729}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c275482622fd94fab8345fab70f938b0, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4596672652455556488}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       insertIndex: -1
@@ -819,31 +832,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   data: {fileID: 11400000, guid: 6a5a50845a106294e928a2e1353a6e5c, type: 2}
+  earthquakeAttack: {fileID: 0}
   head: {fileID: 0}
   rotationSpeed: 10
   firePoint: {fileID: 8423281151499969966}
   target: {fileID: 0}
   bulletPrefab: {fileID: 8214901827094675342, guid: 0a5e60f437bef6f4c9cb375ad52d0ae4, type: 3}
+  rangeIndicator: {fileID: 0}
+  rangeVisualMultiplier: 1
   attackType: 0
   level: 1
   currentXP: 0
   xpToNextLevel: 0
   upgradePoints: 0
---- !u!114 &7734748692436588729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8945632626361355938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a0d1683a2ae8a43a81445080dd3e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TowerUI
-  towerXP: {fileID: 8302503995681092968}
-  xpBar: {fileID: 5462330806185073194}
-  levelText: {fileID: 3297077230601499802}
 --- !u!114 &4596672652455556488
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum AttackType
@@ -10,6 +11,7 @@ public enum AttackType
 public class Tower : MonoBehaviour
 {
     public TowerData data;
+    public EarthquakeAttack earthquakeAttack;
 
     public Transform head;
     public float rotationSpeed = 10f; 
@@ -18,6 +20,8 @@ public class Tower : MonoBehaviour
 
     public GameObject bulletPrefab;
     public GameObject rangeIndicator;
+    public float rangeVisualMultiplier = 1f;
+
 
     public AttackType attackType;
 
@@ -34,9 +38,23 @@ public class Tower : MonoBehaviour
     float bonusRange;
     float bonusFireRate;
 
+    private float baseSize;
+    private GameObject rangeIndicatorInstance;
+
     void Start()
     {
         xpToNextLevel = data.baseXPToLevel;
+
+        if (rangeIndicator != null)
+        {
+            rangeIndicatorInstance = Instantiate(rangeIndicator);
+
+            Renderer r = rangeIndicatorInstance.GetComponent<Renderer>();
+            if (r != null)
+                baseSize = r.bounds.size.x;
+
+            rangeIndicatorInstance.SetActive(false);
+        }
     }
 
     void Update()
@@ -44,22 +62,27 @@ public class Tower : MonoBehaviour
         if (target == null)
         {
             FindTarget();
-            return;
         }
 
-        RotateTowardsTarget();
-
-        float distance = Vector3.Distance(transform.position, target.position);
-
-        if (distance > GetRange())
+        if (target != null)
         {
-            target = null;
-            return;
+            float distance = Vector3.Distance(transform.position, target.position);
+
+            if (distance > GetRange())
+            {
+                target = null;
+            }
+            else
+            {
+                RotateTowardsTarget();
+            }
         }
 
         if (attackType == AttackType.Laser)
         {
-            LaserAttack();
+            if (target != null)
+                LaserAttack();
+
             return;
         }
 
@@ -74,11 +97,16 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-        if (attackType == AttackType.Projectile)
-            ProjectileAttack();
 
-        if (attackType == AttackType.Earthquake)
+        if (attackType == AttackType.Projectile && target != null)
+        {
+            ProjectileAttack();
+        }
+
+        if (attackType == AttackType.Earthquake && target != null)
+        {
             EarthquakeAttack();
+        }
     }
 
     void ProjectileAttack()
@@ -109,17 +137,16 @@ public class Tower : MonoBehaviour
 
     void EarthquakeAttack()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, 3f);
-
-        foreach (Collider col in hits)
+        if (earthquakeAttack != null)
         {
-            EnemyHealth enemy = col.GetComponent<EnemyHealth>();
-            if (enemy == null) continue;
-
-            enemy.TakeDamage(GetBonusDamage(), false, false);
+            earthquakeAttack.Execute(
+                transform.position,
+                GetBonusDamage(),
+                GetRange(),
+                this
+            );
         }
     }
-
     void FindTarget()
     {
         Transform bestTarget = null;
@@ -268,19 +295,29 @@ public class Tower : MonoBehaviour
     }
     public void ShowRange()
     {
-        if (rangeIndicator == null) return;
+        if (rangeIndicatorInstance == null) return;
 
-        rangeIndicator.SetActive(true);
+        rangeIndicatorInstance.SetActive(true);
 
-        float range = GetRange();
+        Vector3 pos = transform.position;
+        pos.y = 0.05f;
 
-        rangeIndicator.transform.localScale = new Vector3(range * 2, 1, range * 2);
+        rangeIndicatorInstance.transform.position = pos;
+
+        float diameter = GetRange() * 2f;
+        float scaleFactor = diameter / baseSize;
+
+        rangeIndicatorInstance.transform.localScale = new Vector3(
+            scaleFactor,
+            1,
+            scaleFactor
+        );
     }
 
     public void HideRange()
     {
-        if (rangeIndicator == null) return;
+        if (rangeIndicatorInstance == null) return;
 
-        rangeIndicator.SetActive(false);
+        rangeIndicatorInstance.SetActive(false);
     }
 }

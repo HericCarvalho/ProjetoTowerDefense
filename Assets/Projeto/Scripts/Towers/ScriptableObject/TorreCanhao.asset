@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fcd5a253ffe27342b16d391f76452a5, type: 3}
-  m_Name: Canhao
+  m_Name: TorreCanhao
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
-  towerName: "Canh\xE3o"
+  towerName: "TorreCanh\xE3o"
   prefab: {fileID: 5087429130691917703, guid: be6555c8b73a1a44bb109c90b377aff5, type: 3}
   baseRange: 30
   baseFireRate: 0.6

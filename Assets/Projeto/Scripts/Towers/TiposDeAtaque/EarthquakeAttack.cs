@@ -1,10 +1,10 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class EarthquakeAttack : MonoBehaviour
 {
     [Header("Stats")]
     public float damage = 50f;
-    public float radius = 5f;
 
     [Header("Damage Type")]
     public bool isMagicDamage;
@@ -27,32 +27,31 @@ public class EarthquakeAttack : MonoBehaviour
     [Header("Visual")]
     public GameObject effectPrefab;
 
-    public void Execute(Vector3 position)
+    public void Execute(Vector3 position, float bonusDamage, float range, Tower owner)
     {
-        if (effectPrefab != null)
+        if (EnemyManager.instance == null) return;
+
+        Transform[] snapshot = EnemyManager.instance.enemies.ToArray();
+
+        foreach (Transform enemyTransform in snapshot)
         {
-            Instantiate(effectPrefab, position, Quaternion.identity);
-        }
+            if (enemyTransform == null || !enemyTransform.gameObject.activeInHierarchy) continue;
 
-        Collider[] hits = Physics.OverlapSphere(position, radius);
+            float distance = Vector3.Distance(position, enemyTransform.position);
+            if (distance > range) continue;
 
-        foreach (Collider col in hits)
-        {
-            EnemyHealth enemy = col.GetComponent<EnemyHealth>();
+            EnemyHealth enemy = enemyTransform.GetComponent<EnemyHealth>();
+            if (enemy == null) continue;
 
-            if (enemy == null)
-                continue;
+            enemy.TakeDamage(damage + bonusDamage, isMagicDamage, isTrueDamage);
 
-            enemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
+            if (owner != null)
+                owner.GainXP(1);
 
-            if (Random.value <= burnChance)
-                enemy.ApplyBurn(burnDuration, burnDPS);
-
-            if (Random.value <= slowChance)
-                enemy.ApplySlow(slowDuration, slowMultiplier);
-
-            if (Random.value <= stunChance)
-                enemy.ApplyStun(stunDuration);
+            enemy.TakeDamage(damage + bonusDamage, isMagicDamage, isTrueDamage); 
+            if (Random.value <= burnChance) enemy.ApplyBurn(burnDuration, burnDPS);
+            if (Random.value <= slowChance) enemy.ApplySlow(slowDuration, slowMultiplier);
+            if (Random.value <= stunChance) enemy.ApplyStun(stunDuration);
         }
     }
 }

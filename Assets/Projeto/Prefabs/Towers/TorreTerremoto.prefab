@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 7467368569125090049}
   - component: {fileID: 8642823522057639878}
   - component: {fileID: 5480422973403855635}
+  - component: {fileID: 463545080663502642}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -335,6 +336,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &463545080663502642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6688077270001998465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a0d1683a2ae8a43a81445080dd3e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerUI
+  towerXP: {fileID: 3173301456440865749}
+  xpBar: {fileID: 734069512525988341}
+  levelText: {fileID: 53375667858133347}
 --- !u!1 &6723706801648002687
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,9 +759,6 @@ PrefabInstance:
       addedObject: {fileID: 3173301456440865749}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 413942483334367880}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3916737435796732791}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
       insertIndex: -1
@@ -822,31 +835,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   data: {fileID: 11400000, guid: 67f77409373fe4341aa6ad653356206e, type: 2}
+  earthquakeAttack: {fileID: 5501082335179171586}
   head: {fileID: 0}
   rotationSpeed: 10
   firePoint: {fileID: 4817201944653208348}
   target: {fileID: 0}
   bulletPrefab: {fileID: 0}
+  rangeIndicator: {fileID: 767256611924886699, guid: c0ae0349ee5d9374791e445e43997986, type: 3}
+  rangeVisualMultiplier: 2
   attackType: 2
   level: 1
   currentXP: 0
   xpToNextLevel: 0
   upgradePoints: 0
---- !u!114 &413942483334367880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8919679645820292701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a0d1683a2ae8a43a81445080dd3e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TowerUI
-  towerXP: {fileID: 3173301456440865749}
-  xpBar: {fileID: 734069512525988341}
-  levelText: {fileID: 53375667858133347}
 --- !u!114 &3916737435796732791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,9 +885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EarthquakeAttack
   damage: 100
-  radius: 50
   isMagicDamage: 0
-  isTrueDamage: 1
+  isTrueDamage: 0
   burnChance: 0
   slowChance: 0
   stunChance: 0.1
@@ -895,4 +895,4 @@ MonoBehaviour:
   slowDuration: 0
   slowMultiplier: 0
   stunDuration: 1
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 1992394677384095584, guid: 8a0154b64d650624392241efe45ab603, type: 3}

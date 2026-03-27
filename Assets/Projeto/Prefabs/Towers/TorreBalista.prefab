@@ -905,8 +905,8 @@ MonoBehaviour:
   rotationSpeed: 20
   firePoint: {fileID: 7325202975597377432}
   target: {fileID: 0}
-  bulletPrefab: {fileID: 8214901827094675342, guid: 0c71fa2ebd3b7364f950526b2d834f77, type: 3}
-  rangeIndicator: {fileID: 4005543734689106623, guid: 41641ec41b9e4824993f69c22301c1f3, type: 3}
+  bulletPrefab: {fileID: 8214901827094675342, guid: c2d820d131f70ae49843754e85d9febd, type: 3}
+  rangeIndicator: {fileID: 4950493618154887555}
   attackType: 0
   level: 1
   currentXP: 0
@@ -964,6 +964,11 @@ CapsuleCollider:
   m_Height: 11.715383
   m_Direction: 1
   m_Center: {x: 0, y: 3.3931775, z: 0}
+--- !u!1 &4950493618154887555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6008327395117807187, guid: 66aaf59ee036d4b14b0a385cb3b83db2, type: 3}
+  m_PrefabInstance: {fileID: 1716560135444983760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4982420806470901543 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5978369120842674423, guid: 66aaf59ee036d4b14b0a385cb3b83db2, type: 3}

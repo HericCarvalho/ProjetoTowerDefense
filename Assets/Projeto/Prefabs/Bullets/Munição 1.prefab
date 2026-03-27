@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5024460452413709272}
   - component: {fileID: -418686080611299407}
   m_Layer: 0
-  m_Name: BulletGeneric
+  m_Name: "Muni\xE7\xE3o 1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
