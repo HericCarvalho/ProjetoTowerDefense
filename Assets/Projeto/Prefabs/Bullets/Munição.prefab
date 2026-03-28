@@ -130,7 +130,7 @@ MonoBehaviour:
   isMagicDamage: 0
   isTrueDamage: 1
   burnChance: 0
-  slowChance: 0
+  slowChance: 0.1
   stunChance: 0
   burnDuration: 0
   burnDPS: 0

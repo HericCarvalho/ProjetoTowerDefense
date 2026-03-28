@@ -884,15 +884,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3588c5ffb7e9244aefb318b84c6c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EarthquakeAttack
-  damage: 100
+  damage: 120
   isMagicDamage: 0
   isTrueDamage: 0
   burnChance: 0
-  slowChance: 0
+  slowChance: 0.5
   stunChance: 0.1
   burnDuration: 0
   burnDPS: 0
-  slowDuration: 0
-  slowMultiplier: 0
+  slowDuration: 1
+  slowMultiplier: 0.3
   stunDuration: 1
   effectPrefab: {fileID: 1992394677384095584, guid: 8a0154b64d650624392241efe45ab603, type: 3}

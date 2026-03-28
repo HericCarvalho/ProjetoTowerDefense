@@ -1063,10 +1063,10 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: a03c0f84ef230964c9af56c76c6e3ab8, type: 2}
   earthquakeAttack: {fileID: 0}
   head: {fileID: 0}
-  rotationSpeed: 10
+  rotationSpeed: 0
   firePoint: {fileID: 3857881383886097970}
   target: {fileID: 0}
-  bulletPrefab: {fileID: 8214901827094675342, guid: 1eb5633d679364c44b97e1048f232dbe, type: 3}
+  bulletPrefab: {fileID: 8214901827094675342, guid: 1ab4e62d67c8d7348941ad53cc5642bc, type: 3}
   rangeIndicator: {fileID: 0}
   rangeVisualMultiplier: 1
   attackType: 0
