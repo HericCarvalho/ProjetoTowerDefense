@@ -7,6 +7,7 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     RectTransform rectTransform;
     Canvas canvas;
+    GameObject ghost;
 
     void Awake()
     {
@@ -16,7 +17,10 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("DRAG FUNCIONANDO");
 
+        ghost = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        ghost.transform.localScale = Vector3.one;
     }
 
     public void OnDrag(PointerEventData eventData)
