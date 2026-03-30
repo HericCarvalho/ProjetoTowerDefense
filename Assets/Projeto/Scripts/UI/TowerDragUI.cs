@@ -7,14 +7,17 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     RectTransform rectTransform;
     Canvas canvas;
+    Vector2 originalPosition;
 
     GameObject ghost;
     BuildNode currentNode;
+
 
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
+        originalPosition = rectTransform.anchoredPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -38,6 +41,7 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
+
         if (currentNode != null &&
             BuildManager.instance.CanBuildOn(currentNode, towerData))
         {
@@ -46,6 +50,8 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         if (ghost != null)
             Destroy(ghost);
+
+        rectTransform.anchoredPosition = originalPosition;
 
         BuildMenuUI.instance.CloseMenu();
     }
