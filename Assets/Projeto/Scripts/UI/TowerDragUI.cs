@@ -7,7 +7,9 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     RectTransform rectTransform;
     Canvas canvas;
+
     GameObject ghost;
+    BuildNode currentNode;
 
     void Awake()
     {
@@ -17,10 +19,16 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("DRAG FUNCIONANDO");
+        currentNode = BuildMenuUI.instance.GetNode();
 
-        ghost = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        ghost.transform.localScale = Vector3.one;
+        if (currentNode == null) return;
+
+        BuildManager.instance.BuildOn(currentNode, towerData);
+
+        ghost = Instantiate(towerData.prefab);
+        ghost.transform.position = currentNode.transform.position;
+
+        SetGhostMaterial(ghost);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -30,14 +38,30 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        BuildNode node = BuildMenuUI.instance.GetNode();
-
-        if (node != null)
+        if (currentNode != null &&
+            BuildManager.instance.CanBuildOn(currentNode, towerData))
         {
-            node.BuildTower(towerData);
+            BuildManager.instance.BuildOn(currentNode, towerData);
         }
+
+        if (ghost != null)
+            Destroy(ghost);
 
         BuildMenuUI.instance.CloseMenu();
     }
 
+    void SetGhostMaterial(GameObject obj)
+    {
+        Renderer[] renderers = obj.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer r in renderers)
+        {
+            foreach (Material m in r.materials)
+            {
+                Color c = m.color;
+                c.a = 0.5f;
+                m.color = c;
+            }
+        }
+    }
 }

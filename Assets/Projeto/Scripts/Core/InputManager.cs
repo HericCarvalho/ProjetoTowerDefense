@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
 
     void HandleClick(Vector2 screenPosition)
     {
-        if (IsPointerOverUI() && !BuildManager.instance.CanBuildOn(null))
+        if (IsPointerOverUI())
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
@@ -45,10 +45,13 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        if (node != null && BuildManager.instance.CanBuildOn(node))
+        if (node != null)
         {
-            BuildManager.instance.BuildOn(node);
-            return;
+            if (node.CanBuild())
+            {
+                BuildMenuUI.instance.OpenMenu(node);
+                return;
+            }
         }
 
         if (node != null)

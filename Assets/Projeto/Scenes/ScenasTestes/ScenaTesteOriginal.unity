@@ -8067,7 +8067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fadb3cec1eae4469346ad2e47d6479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEconomy
-  money: 100
+  money: 5000
   restos: 0
 --- !u!114 &976712773
 MonoBehaviour:
