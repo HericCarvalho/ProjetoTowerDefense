@@ -15027,8 +15027,8 @@ MonoBehaviour:
   attackRate: 1
   attackRange: 1.5
   moveSpeed: 3
-  physicalResistance: 0.17
-  magicalResistance: 0
+  physicalResistance: 0.1
+  magicalResistance: 0.1
   isRanged: 0
   isMagical: 0
   burnResistance: 0.1
@@ -15080,7 +15080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc10413a636d1043ac7d766c6eb7dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyXPReward
-  xpReward: 5
+  xpReward: 1
 --- !u!114 &3677374984225285646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15093,8 +15093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2ae6b24b20be447bf56d7790d77eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyReward
-  moneyReward: 10
-  restosReward: 2
+  moneyReward: 3
+  restosReward: 1
 --- !u!136 &4175876388253225066
 CapsuleCollider:
   m_ObjectHideFlags: 0

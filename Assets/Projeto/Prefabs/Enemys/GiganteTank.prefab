@@ -15026,16 +15026,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 500
-  damage: 15
+  damage: 20
   attackRate: 1
   attackRange: 1
   moveSpeed: 1
-  physicalResistance: 0.2
-  magicalResistance: 0.15
+  physicalResistance: 0.4
+  magicalResistance: 0.5
   isRanged: 0
   isMagical: 0
-  burnResistance: 0
-  slowResistance: 0.1
+  burnResistance: 1
+  slowResistance: 0.3
   stunResistance: 0.3
   immuneToBurn: 1
   immuneToSlow: 0
@@ -15083,8 +15083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2ae6b24b20be447bf56d7790d77eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyReward
-  moneyReward: 10
-  restosReward: 2
+  moneyReward: 200
+  restosReward: 35
 --- !u!114 &2227790710865771346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15097,4 +15097,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc10413a636d1043ac7d766c6eb7dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyXPReward
-  xpReward: 5
+  xpReward: 100

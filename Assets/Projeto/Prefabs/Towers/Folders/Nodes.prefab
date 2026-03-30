@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8214901827094675342
+--- !u!1 &5171757541806615738
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3277812699879139955}
-  - component: {fileID: 5474329326946413690}
-  - component: {fileID: 6723338768538708}
-  - component: {fileID: 5024460452413709272}
-  - component: {fileID: -418686080611299407}
+  - component: {fileID: 2307445698237286384}
+  - component: {fileID: 8427184013652823150}
+  - component: {fileID: 1992191584792619891}
+  - component: {fileID: 1617585737889479924}
+  - component: {fileID: 3660612856229520230}
   m_Layer: 0
-  m_Name: (Slow)BulletGeneric 2
+  m_Name: Nodes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3277812699879139955
+--- !u!4 &2307445698237286384
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8214901827094675342}
+  m_GameObject: {fileID: 5171757541806615738}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.26987, y: 1.96, z: -29.39834}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -13.6, y: 1.9, z: -8.6}
+  m_LocalScale: {x: 5, y: 0.2, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5474329326946413690
+--- !u!33 &8427184013652823150
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8214901827094675342}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6723338768538708
+  m_GameObject: {fileID: 5171757541806615738}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1992191584792619891
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8214901827094675342}
+  m_GameObject: {fileID: 5171757541806615738}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 605534d553a1c314c8568984dc424597, type: 2}
+  - {fileID: 2100000, guid: 2d81d71790a15ed4f8ab0300186206f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,13 +92,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5024460452413709272
-SphereCollider:
+--- !u!136 &1617585737889479924
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8214901827094675342}
+  m_GameObject: {fileID: 5171757541806615738}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,30 +110,21 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-418686080611299407
+  serializedVersion: 2
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3660612856229520230
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8214901827094675342}
+  m_GameObject: {fileID: 5171757541806615738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99e29e2d0e4176344b0cc63316264399, type: 3}
+  m_Script: {fileID: 11500000, guid: e71b2e33d57d7094f91294204ff13b80, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  speed: 20
-  damage: 30
-  isMagicDamage: 1
-  isTrueDamage: 0
-  burnChance: 0
-  slowChance: 0.44
-  stunChance: 0
-  burnDuration: 0
-  burnDPS: 0
-  slowDuration: 5
-  slowMultiplier: 0.5
-  stunDuration: 0
+  m_EditorClassIdentifier: Assembly-CSharp::BuildNode
+  tower: {fileID: 0}
