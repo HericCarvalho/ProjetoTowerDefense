@@ -41,6 +41,7 @@ public class Tower : MonoBehaviour
     private float baseSize;
     private GameObject rangeIndicatorInstance;
 
+
     void Start()
     {
         xpToNextLevel = data.baseXPToLevel;
@@ -54,7 +55,9 @@ public class Tower : MonoBehaviour
                 baseSize = r.bounds.size.x;
 
             rangeIndicatorInstance.SetActive(false);
+
         }
+        Invoke(nameof(ApplyGlobalUpgrades), 0.1f);
     }
 
     void Update()
@@ -118,7 +121,9 @@ public class Tower : MonoBehaviour
 
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
-        bullet.Seek(target, gameObject, bulletPrefab);
+        Vector3 predictedPos = GetPredictedPosition(target);
+
+        bullet.SeekPosition(predictedPos, target, gameObject, bulletPrefab);
 
         bullet.damage += GetBonusDamage();
     }
@@ -133,6 +138,7 @@ public class Tower : MonoBehaviour
         float damage = GetBonusDamage() * Time.deltaTime;
 
         enemy.TakeDamage(damage, false, false);
+        LevelStatsManager.instance.RegisterDamage(this, damage);
     }
 
     void EarthquakeAttack()
@@ -282,15 +288,15 @@ public class Tower : MonoBehaviour
 
         direction.y = 0f;
 
-        if (direction == Vector3.zero)
+        if (direction.sqrMagnitude < 0.001f)
             return;
 
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Quaternion targetRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 90, 0);
 
-        head.rotation = Quaternion.Lerp(
+        head.rotation = Quaternion.RotateTowards(
             head.rotation,
-            lookRotation,
-            rotationSpeed * Time.deltaTime
+            targetRotation,
+            rotationSpeed * 100f * Time.deltaTime
         );
     }
     public void ShowRange()
@@ -319,5 +325,51 @@ public class Tower : MonoBehaviour
         if (rangeIndicatorInstance == null) return;
 
         rangeIndicatorInstance.SetActive(false);
+    }
+    void ApplyGlobalUpgrades()
+    {
+        if (SkillManager.instance == null)
+        {
+            Debug.LogWarning("SkillManager não encontrado!");
+            return;
+        }
+
+        if (SkillManager.instance.allSkills == null)
+        {
+            Debug.LogWarning("Lista de skills vazia!");
+            return;
+        }
+
+        foreach (var skill in SkillManager.instance.allSkills)
+        {
+            if (!SkillManager.instance.IsUnlocked(skill.id))
+                continue;
+
+            bonusDamage += skill.damageBonus;
+            bonusRange += skill.rangeBonus;
+            bonusFireRate += skill.fireRateBonus;
+        }
+    }
+
+    Vector3 GetPredictedPosition(Transform target)
+    {
+        EnemyMovement em = target.GetComponent<EnemyMovement>();
+
+        if (em == null)
+            return target.position;
+
+        Vector3 velocity = em.GetVelocity();
+
+        float distance = Vector3.Distance(firePoint.position, target.position);
+        float timeToHit = distance / GetProjectileSpeed();
+
+        timeToHit = Mathf.Clamp(timeToHit, 0f, 4f);
+
+        return target.position + velocity * timeToHit;
+    }
+    float GetProjectileSpeed()
+    {
+        Bullet b = bulletPrefab.GetComponent<Bullet>();
+        return b != null ? b.speed : 20f;
     }
 }

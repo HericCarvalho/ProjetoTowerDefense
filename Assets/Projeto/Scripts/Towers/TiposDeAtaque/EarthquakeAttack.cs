@@ -44,6 +44,7 @@ public class EarthquakeAttack : MonoBehaviour
             if (enemy == null) continue;
 
             enemy.TakeDamage(damage + bonusDamage, isMagicDamage, isTrueDamage);
+            LevelStatsManager.instance.RegisterDamage(owner, damage);
 
             if (owner != null)
                 owner.GainXP(1);

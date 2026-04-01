@@ -60,13 +60,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909830783930864314}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.24, y: 8.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2597801013911289930}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_Father: {fileID: 8174288639049963350}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2274068533927636042
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,11 +902,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower
   data: {fileID: 11400000, guid: bbb9d06d32e4df245a26a7283e24a644, type: 2}
   earthquakeAttack: {fileID: 0}
-  head: {fileID: 2597801013911289930}
+  head: {fileID: 8174288639049963350}
   rotationSpeed: 20
   firePoint: {fileID: 7325202975597377432}
   target: {fileID: 0}
-  bulletPrefab: {fileID: 7914197139944269974, guid: dd3282ccf673c994caaa24d3e3287f32, type: 3}
+  bulletPrefab: {fileID: 8214901827094675342, guid: 1eb5633d679364c44b97e1048f232dbe, type: 3}
   rangeIndicator: {fileID: 0}
   rangeVisualMultiplier: 1
   attackType: 0
@@ -1018,19 +1018,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: balista
       objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879528566716807029, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5978369120842674423, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
-      insertIndex: -1
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
+      insertIndex: 0
       addedObject: {fileID: 7325202975597377432}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
---- !u!4 &2597801013911289930 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5978369120842674423, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}
-  m_PrefabInstance: {fileID: 8573254211417469117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8174288639049963350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c03a00e92381d4bfaa7d434bcbcabff0, type: 3}

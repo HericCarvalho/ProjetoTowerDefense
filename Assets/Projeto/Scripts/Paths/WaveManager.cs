@@ -106,6 +106,7 @@ public class WaveManager : MonoBehaviour
     public void RegisterEnemyDeath()
     {
         enemiesKilled++;
+        LevelStatsManager.instance.RegisterKill();
     }
     IEnumerator HandleVictory()
     {

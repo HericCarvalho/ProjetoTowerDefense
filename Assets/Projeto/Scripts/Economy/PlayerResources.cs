@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerResources : MonoBehaviour
 {
     public static PlayerResources instance;
+    public ResourceHUD hud;
 
     public int money = 100;
     public int restos = 0;
@@ -25,16 +26,20 @@ public class PlayerResources : MonoBehaviour
         money -= costMoney;
         restos -= costRestos;
 
+        hud.UpdateUI();
+
         return true;
     }
 
     public void AddMoney(int amount)
     {
         money += amount;
+        hud.UpdateUI();
     }
 
     public void AddRestos(int amount)
     {
         restos += amount;
+        hud.UpdateUI();
     }
 }

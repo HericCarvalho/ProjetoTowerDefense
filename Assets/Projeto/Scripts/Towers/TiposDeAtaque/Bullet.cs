@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -32,16 +33,50 @@ public class Bullet : MonoBehaviour
     private GameObject prefabReference;
     private Tower ownerTower;
 
+    Vector3 direction;
+    Vector3 targetPosition;
+    bool usePredicted = false;
+
     public void Seek(Transform _target, GameObject tower, GameObject prefab)
     {
         target = _target;
         prefabReference = prefab;
 
-        if (_target != null)
-            cachedEnemy = _target.GetComponent<EnemyHealth>();
+        if (target == null) return;
+
+        EnemyMovement em = target.GetComponent<EnemyMovement>();
+
+        Vector3 predictedPos = target.position;
+
+        if (em != null)
+        {
+            Vector3 enemyVelocity = em.GetVelocity();
+
+            float distance = Vector3.Distance(transform.position, target.position);
+            float timeToHit = distance / speed;
+
+            predictedPos = target.position + enemyVelocity * timeToHit;
+        }
+
+        direction = (predictedPos - transform.position).normalized;
+        transform.rotation = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 90, 0);
+
+
+        cachedEnemy = target.GetComponent<EnemyHealth>();
 
         if (tower != null)
             ownerTower = tower.GetComponent<Tower>();
+    }
+    public void SeekPosition(Vector3 pos, Transform _target, GameObject tower, GameObject prefab)
+    {
+        targetPosition = pos;
+        target = _target;
+        prefabReference = prefab;
+
+        cachedEnemy = _target != null ? _target.GetComponent<EnemyHealth>() : null;
+        ownerTower = tower != null ? tower.GetComponent<Tower>() : null;
+
+        usePredicted = true;
     }
 
     void Awake()
@@ -53,7 +88,6 @@ public class Bullet : MonoBehaviour
     {
         damage = baseDamage;
         cachedEnemy = null;
-        target = null;
         ownerTower = null;
     }
     void Update()
@@ -64,22 +98,26 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
+        Vector3 aimPoint = usePredicted ? targetPosition : target.position;
+        Vector3 offset = target.forward * -4f;
+        Vector3 dir = (target.position + offset) - transform.position;
+        Vector3 move = dir.normalized * speed * Time.deltaTime;
 
-        if (dir.magnitude <= distanceThisFrame)
+        transform.rotation = Quaternion.LookRotation(dir) * Quaternion.Euler(0, 90, 0);
+
+        transform.position += move;
+
+        if (move.magnitude >= dir.magnitude)
         {
             HitTarget();
-            return;
         }
-
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
     }
     void HitTarget()
     {
         if (cachedEnemy != null)
         {
             cachedEnemy.TakeDamage(damage, isMagicDamage, isTrueDamage);
+            LevelStatsManager.instance.RegisterDamage(ownerTower, damage);
 
             if (Random.value <= burnChance)
                 cachedEnemy.ApplyBurn(burnDuration, burnDPS);

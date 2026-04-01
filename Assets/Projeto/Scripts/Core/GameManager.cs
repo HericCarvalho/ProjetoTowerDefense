@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public WinUI winUI;
 
     public GameObject winPanel;
     public GameObject gameOverPanel;
@@ -17,9 +18,21 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
     }
-
+    void Start()
+    {
+        LevelStatsManager.instance.StartLevel();
+    }
     public void WinGame()
     {
+        if (LevelStatsManager.instance != null)
+        {
+            LevelStatsManager.instance.EndLevel();
+        }
+
+        int stars = LevelStatsManager.instance.GetStars();
+
+        winUI.ShowStats(stars);
+
         Time.timeScale = 0f;
         winPanel.SetActive(true);
     }

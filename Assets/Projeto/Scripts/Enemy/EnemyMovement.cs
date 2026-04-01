@@ -8,6 +8,8 @@ public class EnemyMovement : MonoBehaviour
     bool hasReachedEnd = false;
     private bool isInCombat = false;
 
+    Vector3 lastPosition;
+    Vector3 velocity;
 
     private EnemyHealth stats;
 
@@ -25,6 +27,8 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         Move();
+        velocity = (transform.position - lastPosition) / Time.deltaTime;
+        lastPosition = transform.position;
     }
 
     void Move()
@@ -81,6 +85,10 @@ public class EnemyMovement : MonoBehaviour
     public float GetProgress()
     {
         return waypointIndex;
+    }
+    public Vector3 GetVelocity()
+    {
+        return velocity;
     }
 
     public void SetCombat(bool value)

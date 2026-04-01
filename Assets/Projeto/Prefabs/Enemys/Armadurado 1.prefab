@@ -15114,10 +15114,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.61
-  m_Height: 2.61
+  m_Radius: 0.29564548
+  m_Height: 2.3349328
   m_Direction: 1
-  m_Center: {x: -0.3, y: 0.39, z: -1.08}
+  m_Center: {x: -0.36452436, y: 0.25246647, z: -0.9759381}
 --- !u!4 &6762235365758695927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 576d430edbe6343c7aa36841ce370093, type: 3}
