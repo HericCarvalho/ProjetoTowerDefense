@@ -117,7 +117,9 @@ public class WaveManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        GameManager.instance.WinGame();
+        float performance = (float)BaseHealth.instance.currentHealth / BaseHealth.instance.maxHealth * 100f;
+
+        GameManager.instance.WinGame(performance);
     }
     public int GetRemainingEnemies()
     {

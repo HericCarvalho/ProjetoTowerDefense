@@ -1,44 +1,67 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour
 {
-    [SerializeField] private bool unlocked; //default value is false;
-    public Image unlockImage;
-    public GameObject[] stars;
+    [Header("Configurações")]
+    public int levelID;
+    public string levelName;
 
+    [Header("Elementos de UI")]
+    public GameObject lockImage;       
+    public GameObject starsContainer;  
+    public GameObject[] filledStars;  
 
-    private void Update()
+    private bool isUnlocked;
+
+    private void Start()
     {
-        UpdateLevelImage();
+        UpdateLevelStatus();
     }
-    private void UpdateLevelImage()
+
+    public void UpdateLevelStatus()
     {
-        if (!unlocked)
+        
+        int reachedLevel = PlayerPrefs.GetInt("levelReached", 1);
+        isUnlocked = (levelID <= reachedLevel);
+
+        
+        if (lockImage != null)
         {
-            unlockImage.gameObject.SetActive(true);
-            for (int i = 0; i < stars.Length; i++)
-            {
-                stars[i].gameObject.SetActive(false);
-            }
+            lockImage.SetActive(!isUnlocked);
+        }
+
+        
+        if (!isUnlocked)
+        {
+            
+            starsContainer.SetActive(false);
         }
         else
         {
-            unlockImage.gameObject.SetActive(false);
-            for (int i = 0; i < stars.Length; i++)
+            
+            starsContainer.SetActive(true);
+
+            
+            int starsEarned = PlayerPrefs.GetInt("level_" + levelID + "_stars", 0);
+
+          
+            for (int i = 0; i < filledStars.Length; i++)
             {
-                stars[i].gameObject.SetActive(true);
+                filledStars[i].SetActive(i < starsEarned);
             }
         }
+
+        
+        Button btn = GetComponent<Button>();
+        if (btn != null) btn.interactable = isUnlocked;
     }
 
-    public void PressSelection(string _LevelName)
+    public void PressSelection()
     {
-        if (unlocked == true)
+        if (isUnlocked)
         {
-            SceneManager.LoadScene(_LevelName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
         }
     }
-
 }

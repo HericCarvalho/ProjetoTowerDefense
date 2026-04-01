@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 public class SingleLevel : MonoBehaviour
 {
      
-    public void BackButton()
+    public void BackButton(string _LevelName)
     {
-        SceneManager.LoadScene("LevelSelection");
+        SceneManager.LoadScene(_LevelName);
     }
 
 }
