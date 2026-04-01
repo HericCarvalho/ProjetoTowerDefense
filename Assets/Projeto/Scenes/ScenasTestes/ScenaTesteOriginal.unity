@@ -2731,6 +2731,7 @@ GameObject:
   - component: {fileID: 378257305}
   - component: {fileID: 378257304}
   - component: {fileID: 378257303}
+  - component: {fileID: 378257306}
   m_Layer: 5
   m_Name: Sair
   m_TagString: Untagged
@@ -2802,9 +2803,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 976712780}
-        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
-        m_MethodName: ResumeGame
+      - m_Target: {fileID: 378257306}
+        m_TargetAssemblyTypeName: SingleLevel, Assembly-CSharp
+        m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2852,6 +2853,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378257301}
   m_CullTransparentMesh: 1
+--- !u!114 &378257306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378257301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d1ef7028a21a84ea4605c3c52e5977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SingleLevel
 --- !u!1 &379884080
 GameObject:
   m_ObjectHideFlags: 0
