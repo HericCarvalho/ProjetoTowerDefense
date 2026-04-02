@@ -27,11 +27,19 @@ public class SkillManager : MonoBehaviour
     {
         if (IsUnlocked(skill.id)) return false;
 
+        bool hasAdjacentUnlocked = skill.requiredSkills.Count == 0;
+
         foreach (var req in skill.requiredSkills)
         {
-            if (!IsUnlocked(req.id))
-                return false;
+            if (IsUnlocked(req.id))
+            {
+                hasAdjacentUnlocked = true;
+                break;
+            }
         }
+
+        if (!hasAdjacentUnlocked)
+            return false;
 
         if (!PlayerStars.instance.CanSpend(skill.starCost))
             return false;
