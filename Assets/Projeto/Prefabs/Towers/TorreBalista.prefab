@@ -826,6 +826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TexturaAnel
       objectReference: {fileID: 0}
+    - target: {fileID: 6008327395117807187, guid: 66aaf59ee036d4b14b0a385cb3b83db2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7036213049465896255, guid: 66aaf59ee036d4b14b0a385cb3b83db2, type: 3}
       propertyPath: m_Name
       value: Bones

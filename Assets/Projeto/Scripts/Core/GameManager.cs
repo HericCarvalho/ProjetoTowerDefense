@@ -31,6 +31,14 @@ public class GameManager : MonoBehaviour
 
         int stars = LevelStatsManager.instance.GetStars();
 
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        int reachedLevel = PlayerPrefs.GetInt("levelReached", 2);
+
+        if (currentLevel >= reachedLevel)
+        {
+            PlayerPrefs.SetInt("levelReached", currentLevel + 1);
+        }
+
         winUI.ShowStats(stars);
 
         Time.timeScale = 0f;
@@ -46,7 +54,7 @@ public class GameManager : MonoBehaviour
     public void GoToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("LevelSelection");
     }
 
     public void NextLevel()

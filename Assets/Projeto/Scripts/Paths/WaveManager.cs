@@ -120,7 +120,7 @@ public class WaveManager : MonoBehaviour
 
         float performance = (float)BaseHealth.instance.currentHealth / BaseHealth.instance.maxHealth * 100f;
 
-        GameManager.instance.WinGame(performance);
+        GameManager.instance.WinGame();
     }
     public int GetRemainingEnemies()
     {

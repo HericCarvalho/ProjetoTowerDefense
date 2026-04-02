@@ -684,15 +684,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.787653
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.473043
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -737,6 +737,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       propertyPath: m_Name
       value: TorreMagica
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402737990911837575, guid: c275482622fd94fab8345fab70f938b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -793,10 +797,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 2
+  m_Height: 10
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 4, z: 0}
 --- !u!95 &8596136156533680064
 Animator:
   serializedVersion: 7

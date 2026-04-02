@@ -55,12 +55,14 @@ public class LevelStatsManager : MonoBehaviour
     {
         countingTime = false;
 
-        int stars = CalculateStars();
+        int stars = GetStars();
 
-        SaveBestResult(stars);
-        PlayerStars.instance.AddStars(stars);
+        SaveStars(stars);
 
-        Debug.Log($"Stars: {stars} | Time: {levelTime} | Kills: {enemiesKilled}");
+        if (PlayerStars.instance != null)
+        {
+            PlayerStars.instance.AddStars(stars);
+        }
     }
 
     int CalculateStars()
@@ -75,28 +77,42 @@ public class LevelStatsManager : MonoBehaviour
             return 1;
     }
 
-    void SaveBestResult(int stars)
+    //void SaveBestResult(int stars)
+    //{
+    //    string levelKey = "LEVEL_" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+    //
+    //    int bestStars = PlayerPrefs.GetInt(levelKey + "_STARS", 0);
+    //
+    //    if (stars > bestStars)
+    //    {
+    //        int difference = stars - bestStars;
+    //
+    //        if (PlayerStars.instance != null)
+    //        {
+    //            PlayerStars.instance.AddStars(difference);
+    //        }
+    //
+    //        PlayerPrefs.SetInt(levelKey + "_STARS", stars);
+    //    }
+    //
+    //    PlayerPrefs.SetFloat(levelKey + "_TIME", levelTime);
+    //    PlayerPrefs.SetInt(levelKey + "_KILLS", enemiesKilled);
+    //
+    //    PlayerPrefs.Save();
+    //}
+    public void SaveStars(int stars)
     {
-        string levelKey = "LEVEL_" + UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        int levelIndex = SceneManager.GetActiveScene().buildIndex;
 
-        int bestStars = PlayerPrefs.GetInt(levelKey + "_STARS", 0);
+        string key = "level_" + levelIndex + "_stars";
 
-        if (stars > bestStars)
+        int best = PlayerPrefs.GetInt(key, 0);
+
+        if (stars > best)
         {
-            int difference = stars - bestStars;
-
-            if (PlayerStars.instance != null)
-            {
-                PlayerStars.instance.AddStars(difference);
-            }
-
-            PlayerPrefs.SetInt(levelKey + "_STARS", stars);
+            PlayerPrefs.SetInt(key, stars);
+            PlayerPrefs.Save();
         }
-
-        PlayerPrefs.SetFloat(levelKey + "_TIME", levelTime);
-        PlayerPrefs.SetInt(levelKey + "_KILLS", enemiesKilled);
-
-        PlayerPrefs.Save();
     }
     public int GetStars()
     {
