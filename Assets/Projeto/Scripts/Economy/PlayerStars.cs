@@ -41,12 +41,12 @@ public class PlayerStars : MonoBehaviour
 
     void Save()
     {
-        PlayerPrefs.SetInt("TOTAL_STARS", totalStars);
+        PlayerPrefs.SetInt(SaveContext.GetKey("TOTAL_STARS"), totalStars);
         PlayerPrefs.Save();
     }
 
     void Load()
     {
-        totalStars = PlayerPrefs.GetInt("TOTAL_STARS", 0);
+        totalStars = PlayerPrefs.GetInt(SaveContext.GetKey("TOTAL_STARS"), 0);
     }
 }

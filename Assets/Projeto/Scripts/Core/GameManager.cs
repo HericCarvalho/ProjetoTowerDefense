@@ -16,10 +16,15 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+
         instance = this;
     }
     void Start()
     {
+        int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
+        SaveSystem.SetLastPlayedLevel(SaveContext.currentSlot, currentLevel);
+
         LevelStatsManager.instance.StartLevel();
     }
     public void WinGame()
@@ -32,11 +37,12 @@ public class GameManager : MonoBehaviour
         int stars = LevelStatsManager.instance.GetStars();
 
         int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        int reachedLevel = PlayerPrefs.GetInt("levelReached", 2);
+        int reachedLevel = PlayerPrefs.GetInt(SaveContext.GetKey("levelReached"), 1);
 
         if (currentLevel >= reachedLevel)
         {
-            PlayerPrefs.SetInt("levelReached", currentLevel + 1);
+            PlayerPrefs.SetInt(SaveContext.GetKey("levelReached"), currentLevel + 1);
+            PlayerPrefs.Save();
         }
 
         winUI.ShowStats(stars);

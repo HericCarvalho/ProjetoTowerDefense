@@ -16,16 +16,25 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
+
         UpdateLevelStatus();
     }
+    void Awake()
+    {
 
+        if (!PlayerPrefs.HasKey(SaveContext.GetKey("levelReached")))
+        {
+            PlayerPrefs.SetInt(SaveContext.GetKey("levelReached"), 1);
+            PlayerPrefs.Save();
+        }
+    }
     public void UpdateLevelStatus()
     {
-        
-        int reachedLevel = PlayerPrefs.GetInt("levelReached", 1);
-        isUnlocked = (levelID <= reachedLevel);
 
-        
+        int reachedLevel = PlayerPrefs.GetInt(SaveContext.GetKey("levelReached"), 1);
+        isUnlocked = (levelID == 2) || (levelID <= reachedLevel);
+
+
         if (lockImage != null)
         {
             lockImage.SetActive(!isUnlocked);
@@ -42,10 +51,10 @@ public class LevelSelection : MonoBehaviour
             
             starsContainer.SetActive(true);
 
-            
-            int starsEarned = PlayerPrefs.GetInt("level_" + levelID + "_stars", 0);
 
-          
+            int starsEarned = PlayerPrefs.GetInt(SaveContext.GetKey("level_" + levelID + "_stars"), 0);
+
+
             for (int i = 0; i < filledStars.Length; i++)
             {
                 filledStars[i].SetActive(i < starsEarned);

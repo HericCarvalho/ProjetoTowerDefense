@@ -23,32 +23,73 @@ public class SkillManager : MonoBehaviour
         Load();
     }
 
-    public bool IsUnlocked(string id)
+    public bool CanUnlock(SkillData skill)
     {
-        return unlockedSkills.Contains(id);
+        if (IsUnlocked(skill.id)) return false;
+
+        foreach (var req in skill.requiredSkills)
+        {
+            if (!IsUnlocked(req.id))
+                return false;
+        }
+
+        if (!PlayerStars.instance.CanSpend(skill.starCost))
+            return false;
+
+        return true;
     }
 
     public void UnlockSkill(SkillData skill)
     {
-        if (IsUnlocked(skill.id)) return;
+        if (!CanUnlock(skill)) return;
+
+        PlayerStars.instance.Spend(skill.starCost);
 
         unlockedSkills.Add(skill.id);
 
         Save();
     }
+    public bool IsUnlocked(string id)
+    {
+        return unlockedSkills.Contains(id);
+    }
+
+    public float GetDamageMultiplier()
+    {
+        float total = 1f;
+
+        foreach (var skill in allSkills)
+        {
+            if (IsUnlocked(skill.id))
+            {
+                total += skill.damageBonus;
+            }
+        }
+
+        return total;
+    }
+    public bool IsModificationUnlocked(string modID)
+    {
+        foreach (var skill in allSkills)
+        {
+            if (IsUnlocked(skill.id) && skill.unlocksModificationID == modID)
+                return true;
+        }
+
+        return false;
+    }
 
     public void Save()
     {
         string data = string.Join(",", unlockedSkills);
-        PlayerPrefs.SetString("SKILLS", data);
+        PlayerPrefs.SetString(SaveContext.GetKey("SKILLS"), data);
         PlayerPrefs.Save();
     }
-
     public void Load()
     {
         unlockedSkills.Clear();
 
-        string data = PlayerPrefs.GetString("SKILLS", "");
+        string data = PlayerPrefs.GetString(SaveContext.GetKey("SKILLS"), "");
 
         if (string.IsNullOrEmpty(data)) return;
 

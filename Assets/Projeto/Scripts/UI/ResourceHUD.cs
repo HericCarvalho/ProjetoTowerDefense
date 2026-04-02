@@ -14,7 +14,7 @@ public class ResourceHUD : MonoBehaviour
 
     public void UpdateUI()
     {
-        moneyText.text = "$ " + PlayerResources.instance.money;
-        scrapText.text = "* " + PlayerResources.instance.restos;
+        moneyText.text = "$: " + PlayerResources.instance.money;
+        scrapText.text = "TecnoCarne: " + PlayerResources.instance.restos;
     }
 }

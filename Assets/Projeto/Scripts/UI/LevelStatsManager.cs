@@ -104,7 +104,7 @@ public class LevelStatsManager : MonoBehaviour
     {
         int levelIndex = SceneManager.GetActiveScene().buildIndex;
 
-        string key = "level_" + levelIndex + "_stars";
+        string key = SaveContext.GetKey("level_" + levelIndex + "_stars");
 
         int best = PlayerPrefs.GetInt(key, 0);
 
