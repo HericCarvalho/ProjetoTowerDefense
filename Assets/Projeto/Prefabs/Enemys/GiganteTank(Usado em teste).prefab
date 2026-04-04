@@ -15041,7 +15041,7 @@ MonoBehaviour:
   damage: 20
   attackRate: 0.5
   attackRange: 1
-  moveSpeed: 2
+  moveSpeed: 2.5
   physicalResistance: 0.4
   magicalResistance: 0.2
   isRanged: 0
@@ -15070,7 +15070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad17ca7be125ce34f8e2f9f9308d94a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 1
+  speed: 2.5
 --- !u!114 &7649696260795347885
 MonoBehaviour:
   m_ObjectHideFlags: 0

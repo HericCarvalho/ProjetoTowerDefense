@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Torre Balista
   prefab: {fileID: 1950933338013717121, guid: 3d346523b2d1e8a45a494ef5df69866e, type: 3}
-  baseRange: 35
+  baseRange: 31.5
   baseFireRate: 1
-  rangePerLevel: 0.2
-  fireRatePerLevel: 0.1
+  rangePerLevel: 0.04
+  fireRatePerLevel: 0.02
   baseXPToLevel: 20
   baseUpgradeCost: 10
   costMultiplier: 2
-  costMoney: 40
+  costMoney: 55
   costRestos: 0
   upgradeCostMoney: 100
   upgradeCostRestos: 20

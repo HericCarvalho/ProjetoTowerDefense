@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Torre Magica
   prefab: {fileID: 8945632626361355938, guid: 78898a995f1259b40bfd52241a4b47d3, type: 3}
-  baseRange: 25
-  baseFireRate: 0.5
-  rangePerLevel: 0.4
-  fireRatePerLevel: 0.1
+  baseRange: 29
+  baseFireRate: 0.85
+  rangePerLevel: 0.04
+  fireRatePerLevel: 0.02
   baseXPToLevel: 20
   baseUpgradeCost: 5
   costMultiplier: 1.5

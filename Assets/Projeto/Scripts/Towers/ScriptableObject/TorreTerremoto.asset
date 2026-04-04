@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Torre Terremoto
   prefab: {fileID: 8919679645820292701, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
-  baseRange: 30
+  baseRange: 27
   baseFireRate: 0.2
-  rangePerLevel: 0.2
-  fireRatePerLevel: 0.1
+  rangePerLevel: 0.03
+  fireRatePerLevel: 0.025
   baseXPToLevel: 40
   baseUpgradeCost: 10
   costMultiplier: 3
-  costMoney: 100
+  costMoney: 150
   costRestos: 0
   upgradeCostMoney: 0
   upgradeCostRestos: 0
