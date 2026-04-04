@@ -1487,6 +1487,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Componentes universais
       objectReference: {fileID: 0}
+    - target: {fileID: 4051791056615042697, guid: b00cabc200c6acb49b34fdfae67e2dda, type: 3}
+      propertyPath: enemies.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5303111805153622073, guid: b00cabc200c6acb49b34fdfae67e2dda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.57297
@@ -1541,11 +1545,15 @@ PrefabInstance:
       objectReference: {fileID: 1090001335}
     - target: {fileID: 8565613613401733778, guid: b00cabc200c6acb49b34fdfae67e2dda, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8565613613401733778, guid: b00cabc200c6acb49b34fdfae67e2dda, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 8565613613401733778, guid: b00cabc200c6acb49b34fdfae67e2dda, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22
+      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
