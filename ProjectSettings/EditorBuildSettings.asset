@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Projeto/Scenes/Fases/Cemetary.unity
     guid: c36271c83b73f894da04a00e1afd0a76
+  - enabled: 1
+    path: Assets/Projeto/Scenes/Fases/Dark Bosque.unity
+    guid: 89d635fb95e8e6243935227229b01f36
+  - enabled: 1
+    path: Assets/Projeto/Scenes/Fases/Dark Florest.unity
+    guid: 5d9c8d2ca50d2b749b261b291779da10
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

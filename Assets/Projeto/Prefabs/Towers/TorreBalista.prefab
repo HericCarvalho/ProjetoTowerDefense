@@ -911,7 +911,7 @@ MonoBehaviour:
   firePoint: {fileID: 7325202975597377432}
   target: {fileID: 0}
   bulletPrefab: {fileID: 8214901827094675342, guid: 1eb5633d679364c44b97e1048f232dbe, type: 3}
-  rangeIndicator: {fileID: 0}
+  rangeIndicator: {fileID: 767256611924886699, guid: c0ae0349ee5d9374791e445e43997986, type: 3}
   rangeVisualMultiplier: 1
   attackType: 0
   level: 1

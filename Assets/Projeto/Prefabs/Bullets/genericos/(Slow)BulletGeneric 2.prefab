@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   speed: 20
-  damage: 30
+  damage: 20
   isMagicDamage: 1
   isTrueDamage: 0
   burnChance: 0
