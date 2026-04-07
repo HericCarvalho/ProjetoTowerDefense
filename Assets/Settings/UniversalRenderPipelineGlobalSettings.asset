@@ -75,11 +75,13 @@ MonoBehaviour:
       - rid: 6852985685364965381
       - rid: 6852985685364965384
       - rid: 6852985685364965385
+      - rid: 6852985685364965386
       - rid: 6852985685364965392
       - rid: 6852985685364965394
       - rid: 8712630790384254976
+      - rid: 5747374308340793346
+      - rid: 5747374308340793347
       - rid: 5747374308340793348
-      - rid: 1774860452227448835
       - rid: 1774860452227448836
       - rid: 1774860452227448838
   m_AssetVersion: 10
@@ -112,6 +114,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 1774860452227448832
       type: {class: RayTracingRenderPipelineResources, ns: UnityEngine.Rendering.UnifiedRayTracing, asm: Unity.UnifiedRayTracing.Runtime}
       data:
