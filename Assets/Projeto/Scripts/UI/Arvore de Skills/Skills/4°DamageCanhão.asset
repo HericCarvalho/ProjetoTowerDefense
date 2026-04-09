@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e9c6418a2cf4748bd7aac277c3aff2, type: 3}
   m_Name: "4\xB0DamageCanh\xE3o"
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  id: 
-  skillName: 
+  id: "DamageCanh\xE3o1"
+  skillName: "DamageCanh\xE3o"
   description: 
-  starCost: 0
+  starCost: 2
   unlockedByDefault: 0
-  requiredSkills: []
-  modifiers: []
+  requiredSkills:
+  - {fileID: 11400000, guid: 7472e7ec43b101e4eab6eb10a8296a1c, type: 2}
+  modifiers:
+  - statType: 0
+    modifierType: 0
+    targetType: 3
+    value: 5
   unlocksModificationID: 

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: DamageBalista1
   skillName: DamageBalista
   description: 
-  starCost: 1
+  starCost: 2
   unlockedByDefault: 0
   requiredSkills:
   - {fileID: 11400000, guid: 7472e7ec43b101e4eab6eb10a8296a1c, type: 2}

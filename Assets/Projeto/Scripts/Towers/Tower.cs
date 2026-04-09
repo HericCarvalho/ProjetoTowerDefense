@@ -37,9 +37,12 @@ public class Tower : MonoBehaviour
 
     private float baseSize;
     private GameObject rangeIndicatorInstance;
+    public bool isPreview = false;
 
     void Start()
     {
+        if (isPreview) return;
+
         xpToNextLevel = data.baseXPToLevel;
 
         if (rangeIndicator != null)
@@ -56,6 +59,8 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
+        if (isPreview) return;
+
         if (target == null)
             FindTarget();
 

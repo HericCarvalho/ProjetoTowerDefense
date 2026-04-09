@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TowerUIManager : MonoBehaviour
@@ -37,6 +38,7 @@ public class TowerUIManager : MonoBehaviour
     public float fireRateUpgradeAmount = 0.2f;
 
     private Tower currentTower;
+    
 
     void Awake()
     {
@@ -130,6 +132,26 @@ public class TowerUIManager : MonoBehaviour
     public void OpenTransmute()
     {
         TransmuteUI.instance.Open(currentTower);
+    }
+    public void SellTower()
+    {
+        if (currentTower == null) return;
+
+        Vector3 pos = currentTower.transform.position;
+
+        if (currentTower.data != null)
+            PlayerResources.instance.AddMoney(currentTower.data.sellValue);
+
+        BuildNode node = currentTower.GetComponentInParent<BuildNode>();
+        if (node != null)
+        {
+            node.isOccupied = false;
+            node.currentTower = null;
+        }
+
+        Destroy(currentTower.gameObject);
+
+        Close();
     }
 
     public void Close()

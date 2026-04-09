@@ -26,12 +26,14 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         if (currentNode == null) return;
 
-        BuildManager.instance.BuildOn(currentNode, towerData);
-
         ghost = Instantiate(towerData.prefab);
         ghost.transform.position = currentNode.transform.position;
 
         SetGhostMaterial(ghost);
+
+        Tower t = ghost.GetComponent<Tower>();
+        if (t != null)
+            t.isPreview = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -41,7 +43,6 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
         if (currentNode != null &&
             BuildManager.instance.CanBuildOn(currentNode, towerData))
         {
@@ -65,7 +66,7 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             foreach (Material m in r.materials)
             {
                 Color c = m.color;
-                c.a = 0.5f;
+                c.a = 0.7f;
                 m.color = c;
             }
         }

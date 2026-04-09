@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e9c6418a2cf4748bd7aac277c3aff2, type: 3}
   m_Name: "5\xB0DamageTerremoto"
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  id: 
-  skillName: 
+  id: DamageTerremoto1
+  skillName: DamageTerremoto
   description: 
-  starCost: 0
+  starCost: 2
   unlockedByDefault: 0
-  requiredSkills: []
-  modifiers: []
+  requiredSkills:
+  - {fileID: 11400000, guid: 7472e7ec43b101e4eab6eb10a8296a1c, type: 2}
+  modifiers:
+  - statType: 0
+    modifierType: 0
+    targetType: 4
+    value: 5
   unlocksModificationID: 

@@ -3,6 +3,8 @@ using UnityEngine;
 public class BuildNode : MonoBehaviour
 {
     public GameObject tower;
+    public bool isOccupied;
+    public Tower currentTower;
 
     public bool CanBuild()
     {
