@@ -10,16 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18e9c6418a2cf4748bd7aac277c3aff2, type: 3}
-  m_Name: "1\xB0BonusDamage"
+  m_Name: "5\xB0DamageTerremoto"
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  id: BonusDamage1
-  skillName: "Potencializa\xE7\xE3o"
+  id: 
+  skillName: 
   description: 
-  type: 0
-  starCost: 1
+  starCost: 0
   unlockedByDefault: 0
   requiredSkills: []
-  damageBonus: 5
-  rangeBonus: 0
-  fireRateBonus: 0
+  modifiers: []
   unlocksModificationID: 

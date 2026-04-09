@@ -27,7 +27,7 @@ public class EarthquakeAttack : MonoBehaviour
     [Header("Visual")]
     public GameObject effectPrefab;
 
-    public void Execute(Vector3 position, float bonusDamage, float range, Tower owner)
+    public void Execute(Vector3 position, float damageMultiplier, float range, Tower owner)
     {
         if (EnemyManager.instance == null) return;
 
@@ -43,13 +43,14 @@ public class EarthquakeAttack : MonoBehaviour
             EnemyHealth enemy = enemyTransform.GetComponent<EnemyHealth>();
             if (enemy == null) continue;
 
-            enemy.TakeDamage(damage + bonusDamage, isMagicDamage, isTrueDamage);
-            LevelStatsManager.instance.RegisterDamage(owner, damage);
+            float finalDamage = damage * damageMultiplier;
+
+            enemy.TakeDamage(finalDamage, isMagicDamage, isTrueDamage);
+            LevelStatsManager.instance.RegisterDamage(owner, finalDamage);
 
             if (owner != null)
                 owner.GainXP(1);
 
-            enemy.TakeDamage(damage + bonusDamage, isMagicDamage, isTrueDamage); 
             if (Random.value <= burnChance) enemy.ApplyBurn(burnDuration, burnDPS);
             if (Random.value <= slowChance) enemy.ApplySlow(slowDuration, slowMultiplier);
             if (Random.value <= stunChance) enemy.ApplyStun(stunDuration);

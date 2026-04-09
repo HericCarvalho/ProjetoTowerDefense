@@ -14,25 +14,22 @@ public class Tower : MonoBehaviour
     public EarthquakeAttack earthquakeAttack;
 
     public Transform head;
-    public float rotationSpeed = 10f; 
+    public float rotationSpeed = 10f;
     public Transform firePoint;
     public Transform target;
 
     public GameObject bulletPrefab;
     public GameObject rangeIndicator;
-    public float rangeVisualMultiplier = 1f;
-
 
     public AttackType attackType;
-
-    float fireCountdown = 0f;
-
+    public TargetType towerType;
 
     public int level = 1;
     public int currentXP = 0;
     public int xpToNextLevel;
-
     public int upgradePoints = 0;
+
+    float fireCountdown = 0f;
 
     float bonusDamage;
     float bonusRange;
@@ -40,7 +37,6 @@ public class Tower : MonoBehaviour
 
     private float baseSize;
     private GameObject rangeIndicatorInstance;
-
 
     void Start()
     {
@@ -55,37 +51,28 @@ public class Tower : MonoBehaviour
                 baseSize = r.bounds.size.x;
 
             rangeIndicatorInstance.SetActive(false);
-
         }
-        Invoke(nameof(ApplyGlobalUpgrades), 0.1f);
     }
 
     void Update()
     {
         if (target == null)
-        {
             FindTarget();
-        }
 
         if (target != null)
         {
             float distance = Vector3.Distance(transform.position, target.position);
 
             if (distance > GetRange())
-            {
                 target = null;
-            }
             else
-            {
                 RotateTowardsTarget();
-            }
         }
 
         if (attackType == AttackType.Laser)
         {
             if (target != null)
                 LaserAttack();
-
             return;
         }
 
@@ -100,16 +87,11 @@ public class Tower : MonoBehaviour
 
     void Shoot()
     {
-
         if (attackType == AttackType.Projectile && target != null)
-        {
             ProjectileAttack();
-        }
 
         if (attackType == AttackType.Earthquake && target != null)
-        {
             EarthquakeAttack();
-        }
     }
 
     void ProjectileAttack()
@@ -125,7 +107,7 @@ public class Tower : MonoBehaviour
 
         bullet.SeekPosition(predictedPos, target, gameObject, bulletPrefab);
 
-        bullet.damage += GetBonusDamage();
+        bullet.damage = GetFinalDamage();
     }
 
     void LaserAttack()
@@ -135,7 +117,7 @@ public class Tower : MonoBehaviour
         EnemyHealth enemy = target.GetComponent<EnemyHealth>();
         if (enemy == null) return;
 
-        float damage = GetBonusDamage() * Time.deltaTime;
+        float damage = GetBonusDamageValue() * Time.deltaTime;
 
         enemy.TakeDamage(damage, false, false);
         LevelStatsManager.instance.RegisterDamage(this, damage);
@@ -146,13 +128,14 @@ public class Tower : MonoBehaviour
         if (earthquakeAttack != null)
         {
             earthquakeAttack.Execute(
-                transform.position,
-                GetBonusDamage(),
-                GetRange(),
-                this
+            transform.position,
+            GetFinalDamage(),
+            GetRange(),
+            this
             );
         }
     }
+
     void FindTarget()
     {
         Transform bestTarget = null;
@@ -180,65 +163,56 @@ public class Tower : MonoBehaviour
         currentXP += amount;
 
         while (currentXP >= xpToNextLevel)
-        {
             LevelUp();
-        }
     }
 
     public void LevelUp()
     {
         currentXP -= xpToNextLevel;
         level++;
-
         xpToNextLevel = Mathf.RoundToInt(xpToNextLevel * 1.5f);
-
         upgradePoints++;
     }
 
     public float GetRange()
     {
-        return data.baseRange + (data.rangePerLevel * (level - 1)) + bonusRange;
+        float baseValue = data.baseRange + (data.rangePerLevel * (level - 1)) + bonusRange;
+
+        return SkillManager.instance.GetStat(
+            StatType.Range,
+            towerType,
+            baseValue
+        );
     }
 
     public float GetFireRate()
     {
-        return data.baseFireRate + (data.fireRatePerLevel * (level - 1)) + bonusFireRate;
+        float baseValue = data.baseFireRate + (data.fireRatePerLevel * (level - 1)) + bonusFireRate;
+
+        return SkillManager.instance.GetStat(
+            StatType.FireRate,
+            towerType,
+            baseValue
+        );
     }
 
-    public float GetBonusDamage()
+    public float GetFinalDamage()
+    {
+        float baseDamage = bulletPrefab.GetComponent<Bullet>().damage;
+
+        float damageWithStars = SkillManager.instance.GetStat(
+            StatType.Damage,
+            towerType,
+            baseDamage
+        );
+
+        Debug.Log($"Base: {baseDamage} | After Skills: {damageWithStars} | Level Bonus: {bonusDamage}");
+
+        return damageWithStars + bonusDamage;
+    }
+    public float GetBonusDamageValue()
     {
         return bonusDamage;
-    }
-
-    public void AddDamage(float amount)
-    {
-        bonusDamage += amount;
-    }
-
-    public void AddRange(float amount)
-    {
-        bonusRange += amount;
-    }
-
-    public void AddFireRate(float amount)
-    {
-        bonusFireRate += amount;
-    }
-
-    public void TryEvolve()
-    {
-        if (level < 5) return;
-        if (data.nextUpgrade == null) return;
-
-        int cost = 20;
-
-        if (!PlayerResources.instance.CanAfford(0, cost))
-            return;
-
-        PlayerResources.instance.Spend(0, cost);
-
-        Instantiate(data.nextUpgrade.prefab, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
     public void UpgradeDamage(float amount)
     {
@@ -263,6 +237,23 @@ public class Tower : MonoBehaviour
         bonusFireRate += amount;
         upgradePoints--;
     }
+
+    public void TryEvolve()
+    {
+        if (level < 5) return;
+        if (data.nextUpgrade == null) return;
+
+        int cost = 20;
+
+        if (!PlayerResources.instance.CanAfford(0, cost))
+            return;
+
+        PlayerResources.instance.Spend(0, cost);
+
+        Instantiate(data.nextUpgrade.prefab, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
     public void Transmute(TowerData option)
     {
         if (level < 10) return;
@@ -271,21 +262,18 @@ public class Tower : MonoBehaviour
         Instantiate(option.prefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
-    public void Sell()
-    {
 
-    }
     public void OnSelected()
     {
         TowerUIManager.instance.SelectTower(this);
     }
+
     void RotateTowardsTarget()
     {
         if (target == null || head == null)
             return;
 
         Vector3 direction = target.position - head.position;
-
         direction.y = 0f;
 
         if (direction.sqrMagnitude < 0.001f)
@@ -299,6 +287,7 @@ public class Tower : MonoBehaviour
             rotationSpeed * 100f * Time.deltaTime
         );
     }
+
     public void ShowRange()
     {
         if (rangeIndicatorInstance == null) return;
@@ -326,30 +315,6 @@ public class Tower : MonoBehaviour
 
         rangeIndicatorInstance.SetActive(false);
     }
-    void ApplyGlobalUpgrades()
-    {
-        if (SkillManager.instance == null)
-        {
-            Debug.LogWarning("SkillManager não encontrado!");
-            return;
-        }
-
-        if (SkillManager.instance.allSkills == null)
-        {
-            Debug.LogWarning("Lista de skills vazia!");
-            return;
-        }
-
-        foreach (var skill in SkillManager.instance.allSkills)
-        {
-            if (!SkillManager.instance.IsUnlocked(skill.id))
-                continue;
-
-            bonusDamage += skill.damageBonus;
-            bonusRange += skill.rangeBonus;
-            bonusFireRate += skill.fireRateBonus;
-        }
-    }
 
     Vector3 GetPredictedPosition(Transform target)
     {
@@ -367,6 +332,7 @@ public class Tower : MonoBehaviour
 
         return target.position + velocity * timeToHit;
     }
+
     float GetProjectileSpeed()
     {
         Bullet b = bulletPrefab.GetComponent<Bullet>();

@@ -62,20 +62,6 @@ public class SkillManager : MonoBehaviour
         return unlockedSkills.Contains(id);
     }
 
-    public float GetDamageMultiplier()
-    {
-        float total = 1f;
-
-        foreach (var skill in allSkills)
-        {
-            if (IsUnlocked(skill.id))
-            {
-                total += skill.damageBonus;
-            }
-        }
-
-        return total;
-    }
     public bool IsModificationUnlocked(string modID)
     {
         foreach (var skill in allSkills)
@@ -86,7 +72,43 @@ public class SkillManager : MonoBehaviour
 
         return false;
     }
+    public float GetStat(StatType stat, TargetType target, float baseValue)
+    {
+        float flat = 0f;
+        float percent = 0f;
 
+        foreach (var skill in allSkills)
+        {
+            if (!IsUnlocked(skill.id)) continue;
+
+            foreach (var mod in skill.modifiers)
+            {
+                if (mod.statType != stat) continue;
+
+                if (!Affects(mod.targetType, target))
+                    continue;
+
+                if (mod.modifierType == ModifierType.Flat)
+                    flat += mod.value;
+
+                if (mod.modifierType == ModifierType.Percent)
+                    percent += mod.value;
+            }
+        }
+
+        return (baseValue + flat) * (1f + percent);
+    }
+    public bool Affects(TargetType skillTarget, TargetType target)
+    {
+        if (skillTarget == TargetType.AllTowers &&
+            (target == TargetType.Ballista ||
+             target == TargetType.Magic ||
+             target == TargetType.Cannon ||
+             target == TargetType.Earthquake))
+            return true;
+
+        return skillTarget == target;
+    }
     public void Save()
     {
         string data = string.Join(",", unlockedSkills);

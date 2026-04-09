@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
 
     public float stunDuration;
 
-    float baseDamage;
+    public float baseDamage;
 
     private Transform target;
     private EnemyHealth cachedEnemy;

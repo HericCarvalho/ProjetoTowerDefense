@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.EventSystems;
 
 public class SkillTreeController : MonoBehaviour, IDragHandler, IScrollHandler
@@ -17,16 +18,27 @@ public class SkillTreeController : MonoBehaviour, IDragHandler, IScrollHandler
     private Vector3 targetScale;
 
 
-    void Start()
+    void OnEnable()
     {
-        targetPosition = content.anchoredPosition;
-        targetScale = content.localScale;
+        StartCoroutine(DelayedCenter());
+    }
+
+    IEnumerator DelayedCenter()
+    {
+        yield return new WaitForEndOfFrame();
 
         if (initialFocus != null)
         {
             CenterOnTarget(initialFocus);
         }
     }
+    void Start()
+    {
+        targetPosition = content.anchoredPosition;
+        targetScale = content.localScale;
+
+    }
+
 
     void Update()
     {
