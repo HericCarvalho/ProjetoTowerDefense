@@ -655,70 +655,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262922642}
   m_CullTransparentMesh: 1
---- !u!1 &383280174
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 383280177}
-  - component: {fileID: 383280176}
-  - component: {fileID: 383280175}
-  m_Layer: 0
-  m_Name: ComponentesSalvos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &383280175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383280174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24b509ec6d824b74bad01e663c7c4c8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStars
-  totalStars: 0
---- !u!114 &383280176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383280174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f228a794e7964ec4daa13008b4122728, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillManager
-  allSkills:
-  - {fileID: 11400000, guid: 7472e7ec43b101e4eab6eb10a8296a1c, type: 2}
-  - {fileID: 11400000, guid: 9af99078c9507a9408d8c26d642d221f, type: 2}
-  - {fileID: 11400000, guid: cde53946817d3d44aa5c2b3affb8a571, type: 2}
-  - {fileID: 11400000, guid: ab00b0ef63c7a6144ac816865cb945dc, type: 2}
-  - {fileID: 11400000, guid: 343c12cd2b145074d94d25b85e6d6bac, type: 2}
---- !u!4 &383280177
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383280174}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1558.9861, y: 688.9305, z: -22.06253}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &405269375
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,6 +792,67 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1001 &508771449
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1558.9861
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 688.9305
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -22.06253
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197110788969755962, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979849200048485822, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: m_Name
+      value: ComponentesUniversais
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009779464131162716, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
 --- !u!1 &570804145
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +938,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 383280176}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
         m_MethodName: UnlockSkill
         m_Mode: 2
@@ -1273,7 +1270,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 383280176}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
         m_MethodName: UnlockSkill
         m_Mode: 2
@@ -1980,7 +1977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelSelection
   levelID: 2
-  levelName: Cemetary
+  levelName: ScenaTesteOriginal
   lockImage: {fileID: 0}
   starsContainer: {fileID: 1470832318}
   filledStars:
@@ -2749,7 +2746,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 383280176}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
         m_MethodName: UnlockSkill
         m_Mode: 2
@@ -2977,7 +2974,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 383280176}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
         m_MethodName: UnlockSkill
         m_Mode: 2
@@ -3647,7 +3644,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 383280176}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
         m_MethodName: UnlockSkill
         m_Mode: 2
@@ -4089,7 +4086,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 383280177}
+  - {fileID: 508771449}
   - {fileID: 405269378}
   - {fileID: 148415245}
   - {fileID: 59366480}

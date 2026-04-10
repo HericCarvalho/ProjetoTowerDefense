@@ -32,6 +32,6 @@ public class BaseHealth : MonoBehaviour
 
     void Die()
     {
-        GameManager.instance.GameOver();
+        LevelManager.instance.GameOver();
     }
 }

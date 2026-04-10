@@ -4,63 +4,29 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public WinUI winUI;
-
-    public GameObject winPanel;
-    public GameObject gameOverPanel;
-
-    public GameObject reviveHUD;
-
-    private bool isReviveOpen = false;
-
 
     void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+
     void Start()
     {
-        int currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-
-        SaveSystem.SetLastPlayedLevel(SaveContext.currentSlot, currentLevel);
-
-        LevelStatsManager.instance.StartLevel();
-    }
-    public void WinGame()
-    {
-        if (LevelStatsManager.instance != null)
-        {
-            LevelStatsManager.instance.EndLevel();
-        }
-
-        int stars = LevelStatsManager.instance.GetStars();
-
         int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        int reachedLevel = PlayerPrefs.GetInt(SaveContext.GetKey("levelReached"), 1);
-
-        if (currentLevel >= reachedLevel)
-        {
-            PlayerPrefs.SetInt(SaveContext.GetKey("levelReached"), currentLevel + 1);
-            PlayerPrefs.Save();
-        }
-
-        winUI.ShowStats(stars);
-
-        Time.timeScale = 0f;
-        winPanel.SetActive(true);
-    }
-
-    public void GameOver()
-    {
-        Time.timeScale = 0f;
-        gameOverPanel.SetActive(true);
+        SaveSystem.SetLastPlayedLevel(SaveContext.currentSlot, currentLevel);
     }
 
     public void GoToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("LevelSelection");
+        SceneLoader.instance.LoadScene("LevelSelection");
     }
 
     public void NextLevel()
@@ -76,30 +42,19 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Última fase concluída!");
             SceneManager.LoadScene("Menu");
         }
     }
-    public void ToggleReviveHUD()
-    {
-        isReviveOpen = !isReviveOpen;
 
-        reviveHUD.SetActive(isReviveOpen);
-    }
+    public void UnlockNextLevel()
+    {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        int reachedLevel = PlayerPrefs.GetInt(SaveContext.GetKey("levelReached"), 1);
 
-    public void OpenReviveHUD()
-    {
-        isReviveOpen = true;
-        reviveHUD.SetActive(true);
-    }
-    public void CloseReviveHUD()
-    {
-        isReviveOpen = false;
-        reviveHUD.SetActive(false);
-    }
-
-    public bool IsReviveOpen()
-    {
-        return isReviveOpen;
+        if (currentLevel >= reachedLevel)
+        {
+            PlayerPrefs.SetInt(SaveContext.GetKey("levelReached"), currentLevel + 1);
+            PlayerPrefs.Save();
+        }
     }
 }
