@@ -1,3 +1,4 @@
+using AudioSystem;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
@@ -26,6 +27,8 @@ public class EarthquakeAttack : MonoBehaviour
 
     [Header("Visual")]
     public GameObject effectPrefab;
+
+    [SerializeField] SoundData soundData;
 
     public void Execute(Vector3 position, float damageMultiplier, float range, Tower owner)
     {

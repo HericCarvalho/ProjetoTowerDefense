@@ -1,8 +1,10 @@
+using AudioSystem;
 using TMPro;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
     [Header("Stats")]
     public float speed = 20f;
     public float damage = 50f;
@@ -26,6 +28,8 @@ public class Bullet : MonoBehaviour
     public float stunDuration;
 
     public float baseDamage;
+
+    [SerializeField] SoundData soundData;
 
     private Transform target;
     private EnemyHealth cachedEnemy;
