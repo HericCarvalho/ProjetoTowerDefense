@@ -137,3 +137,27 @@ MonoBehaviour:
   slowDuration: 0
   slowMultiplier: 0
   stunDuration: 0
+  baseDamage: 0
+  soundData:
+    clip: {fileID: 8300000, guid: 9cbba6722b0750849ac9b42f8203716d, type: 3}
+    mixerGroup: {fileID: -5151788706607545606, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
+    loop: 0
+    playOnAwake: 1
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
