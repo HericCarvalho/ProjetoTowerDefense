@@ -1,46 +1,73 @@
 using UnityEngine;
 
-namespace AudioSystem {
-    public class SoundBuilder {
+namespace AudioSystem
+{
+    public class SoundBuilder
+    {
         readonly SoundManager soundManager;
         Vector3 position = Vector3.zero;
+        Transform parent = null; 
         bool randomPitch;
 
-        public SoundBuilder(SoundManager soundManager) {
+        public SoundBuilder(SoundManager soundManager)
+        {
             this.soundManager = soundManager;
         }
 
-        public SoundBuilder WithPosition(Vector3 position) {
+        public SoundBuilder WithPosition(Vector3 position)
+        {
             this.position = position;
             return this;
         }
 
-        public SoundBuilder WithRandomPitch() {
+        
+        public SoundBuilder WithGameObjectAsParent(Transform parent)
+        {
+            this.parent = parent;
+            return this;
+        }
+
+        public SoundBuilder WithRandomPitch()
+        {
             this.randomPitch = true;
             return this;
         }
 
-        public void Play(SoundData soundData) {
-            if (soundData == null) {
+        public void Play(SoundData soundData)
+        {
+            if (soundData == null)
+            {
                 Debug.LogError("SoundData is null");
                 return;
             }
-            
+
             if (!soundManager.CanPlaySound(soundData)) return;
-            
+
             SoundEmitter soundEmitter = soundManager.Get();
             soundEmitter.Initialize(soundData);
-            soundEmitter.transform.position = position;
-            soundEmitter.transform.parent = soundManager.transform;
 
-            if (randomPitch) {
+            
+            if (parent != null)
+            {
+                soundEmitter.transform.SetParent(parent);
+                soundEmitter.transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                soundEmitter.transform.position = position;
+                soundEmitter.transform.parent = soundManager.transform;
+            }
+
+            if (randomPitch)
+            {
                 soundEmitter.WithRandomPitch();
             }
 
-            if (soundData.frequentSound) {
+            if (soundData.frequentSound)
+            {
                 soundEmitter.Node = soundManager.FrequentSoundEmitters.AddLast(soundEmitter);
             }
-            
+
             soundEmitter.Play();
         }
     }

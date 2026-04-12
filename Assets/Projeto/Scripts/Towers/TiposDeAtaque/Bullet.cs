@@ -93,6 +93,15 @@ public class Bullet : MonoBehaviour
         damage = baseDamage;
         cachedEnemy = null;
         ownerTower = null;
+       
+        if (soundData != null)
+        {
+            SoundManager.Instance.CreateSoundBuilder()
+                .WithGameObjectAsParent(this.transform) 
+                .WithRandomPitch()
+                .Play(soundData);
+        }
+
     }
     void Update()
     {

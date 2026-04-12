@@ -1074,17 +1074,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3781827447499132646, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2134580158528326394, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 569662151}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
---- !u!4 &325364105 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2134580158528326394, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
-  m_PrefabInstance: {fileID: 325364104}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &340605338 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2307445698237286384, guid: aebcfe9d2ae75444f9749fee90276bfd, type: 3}
@@ -1379,73 +1371,6 @@ MonoBehaviour:
   - {fileID: 359275091}
   - {fileID: 1396469621}
   - {fileID: 941382387}
---- !u!1 &569662150
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 569662151}
-  - component: {fileID: 569662153}
-  - component: {fileID: 569662152}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &569662151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569662150}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -102.04947, y: 0, z: -25.65912}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 325364105}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &569662152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569662150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e268dacac7042a249a86c7f22229d80c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.MusicManager
-  AutoUnparentOnAwake: 1
-  initialPlaylist:
-  - {fileID: 8300000, guid: babbbc7b92df5044a9f3e3c0db843207, type: 3}
-  musicMixerGroup: {fileID: 24300002, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
---- !u!114 &569662153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569662150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb9be6cf2e70a24fbfd1ef0f0cd4f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.SoundManager
-  AutoUnparentOnAwake: 1
-  soundEmitterPrefab: {fileID: 6922516624012894975, guid: 69f4e74f8bd143547bf9ccf0e2d2439c, type: 3}
-  collectionCheck: 1
-  defaultCapacity: 10
-  maxPoolSize: 100
-  maxSoundInstances: 30
 --- !u!1001 &606351231
 PrefabInstance:
   m_ObjectHideFlags: 0

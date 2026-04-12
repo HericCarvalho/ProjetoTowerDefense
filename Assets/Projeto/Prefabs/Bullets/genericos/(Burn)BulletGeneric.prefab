@@ -140,7 +140,7 @@ MonoBehaviour:
   baseDamage: 0
   soundData:
     clip: {fileID: 8300000, guid: 9cbba6722b0750849ac9b42f8203716d, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
+    mixerGroup: {fileID: -5151788706607545606, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
     loop: 0
     playOnAwake: 1
     frequentSound: 0

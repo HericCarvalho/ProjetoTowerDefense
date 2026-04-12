@@ -82,7 +82,7 @@ MonoBehaviour:
   baseDamage: 0
   soundData:
     clip: {fileID: 8300000, guid: 612d6cd3b19dd93449cfd09e09cc0535, type: 3}
-    mixerGroup: {fileID: 24300002, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
+    mixerGroup: {fileID: -5151788706607545606, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
     loop: 0
     playOnAwake: 1
     frequentSound: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
     panStereo: 0
     spatialBlend: 0
     reverbZoneMix: 1
-    dopplerLevel: 1
+    dopplerLevel: 0
     spread: 0
     minDistance: 1
     maxDistance: 500
