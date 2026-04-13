@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class LevelManager : MonoBehaviour
 
     bool isReviveOpen = false;
 
+    public CanvasGroup winGroup;
+    public CanvasGroup gameOverGroup;
+
     void Awake()
     {
         instance = this;
@@ -20,7 +25,41 @@ public class LevelManager : MonoBehaviour
     {
         LevelStatsManager.instance.StartLevel();
     }
+    public void GoToMenu()
+    {
+        Time.timeScale = 1f;
 
+        CanvasGroup hud = null;
+
+        if (winPanel.activeSelf)
+            hud = winGroup;
+        else if (gameOverPanel.activeSelf)
+            hud = gameOverGroup;
+
+        SceneLoader.instance.LoadScene("LevelSelection", hud);
+    }
+
+    public void NextLevel()
+    {
+        Time.timeScale = 1f;
+
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextIndex = currentIndex + 1;
+
+        CanvasGroup hud = null;
+
+        if (winPanel.activeSelf)
+            hud = winGroup;
+
+        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneLoader.instance.LoadSceneByIndex(nextIndex, hud);
+        }
+        else
+        {
+            SceneLoader.instance.LoadScene("Menu", hud);
+        }
+    }
     public void WinGame()
     {
         if (LevelStatsManager.instance != null)

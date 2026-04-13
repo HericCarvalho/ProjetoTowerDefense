@@ -90,5 +90,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b536bba068043414c913d2637cb8f755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  loadingPrefab: {fileID: 3195459890539882710, guid: 5140fb5fa1a7a0c4bb5e69759578ab1e, type: 3}
-  fadeDuration: 2
+  loadingPrefab: {fileID: 2012497741034830285, guid: 4332280ec9ba5c8459de4acdab193984, type: 3}
+  fadeDuration: 5

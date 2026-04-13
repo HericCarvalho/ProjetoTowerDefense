@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &18420936 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2726382187843821088, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
-  m_PrefabInstance: {fileID: 1200365414453984435}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15b9a22d5b5f3924ca885f6243495859, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1 &52554140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,7 +1033,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1654400497369878395, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
   m_PrefabInstance: {fileID: 4272334405071598423}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1154254245}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 796d3f6432eacd74e9b1b3ef7d03905f, type: 3}
@@ -1392,11 +1381,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783503476}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &911743614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7912179165962368787, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
-  m_PrefabInstance: {fileID: 4272334405071598423}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &946251325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2093,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128994343}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1154254245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4892135809159103082, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
+  m_PrefabInstance: {fileID: 4272334405071598423}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1172618865
 GameObject:
   m_ObjectHideFlags: 0
@@ -5497,6 +5486,14 @@ PrefabInstance:
       propertyPath: fadeImage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9009779464131162716, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009779464131162716, guid: 2002fe0162f3206419a7f7b9b80ce95b, type: 3}
+      propertyPath: loadingPrefab
+      value: 
+      objectReference: {fileID: 2012497741034830285, guid: 4332280ec9ba5c8459de4acdab193984, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5517,7 +5514,15 @@ PrefabInstance:
     - target: {fileID: 2319155060778492862, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 18420936}
+      objectReference: {fileID: 6433514170152529416}
+    - target: {fileID: 2319155060778492862, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319155060778492862, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2668760069910152046, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5613,7 +5618,15 @@ PrefabInstance:
     - target: {fileID: 3437796256754605152, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 18420936}
+      objectReference: {fileID: 6433514170152529416}
+    - target: {fileID: 3437796256754605152, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437796256754605152, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3584610233952483810, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5626,6 +5639,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 976712780}
+    - target: {fileID: 4892135809159103082, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7662770907294084657, guid: 300b06723ed23bd46aaef3356997942f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -5823,7 +5840,7 @@ PrefabInstance:
     - target: {fileID: 2157265468280163263, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
       propertyPath: winPanel
       value: 
-      objectReference: {fileID: 911743614}
+      objectReference: {fileID: 1154254245}
     - target: {fileID: 2157265468280163263, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
       propertyPath: reviveHUD
       value: 
@@ -5861,6 +5878,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
+--- !u!114 &6433514170152529416 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2157265468280163263, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
+  m_PrefabInstance: {fileID: 6433514170152529415}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9df23833e8b6b7468a3896112d6ffbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
 --- !u!1001 &6625667073173437923
 PrefabInstance:
   m_ObjectHideFlags: 0

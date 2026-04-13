@@ -70,7 +70,7 @@ public class LevelSelection : MonoBehaviour
     {
         if (isUnlocked)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(levelName);
+            SceneLoader.instance.LoadScene(levelName);
         }
     }
 }

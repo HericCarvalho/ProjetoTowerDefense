@@ -14,7 +14,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(gameSceneName);
+        SceneLoader.instance.LoadScene(gameSceneName);
     }
 
     public void OpenOptions()
