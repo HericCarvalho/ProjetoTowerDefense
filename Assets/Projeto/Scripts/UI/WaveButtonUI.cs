@@ -26,6 +26,10 @@ public class WaveButtonUI : MonoBehaviour
 
     void StartWave()
     {
+        if (!TutorialBlocker.Instance.CanStartWave()) return;
+
+        TutorialManager.Instance.OnWaveStarted();
+
         if (WaveManager.instance != null)
             WaveManager.instance.StartWave();
     }

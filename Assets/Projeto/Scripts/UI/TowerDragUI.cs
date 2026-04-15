@@ -22,6 +22,10 @@ public class TowerDragUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!TutorialBlocker.Instance.CanDragTower()) return;
+
+        TutorialManager.Instance.OnTowerDragged();
+
         currentNode = BuildMenuUI.instance.GetNode();
 
         if (currentNode == null) return;

@@ -16,15 +16,20 @@ public class BuildManager : MonoBehaviour
 
         instance = this;
         selectedTower = null;
+
     }
 
     public void SelectTower(TowerData tower)
     {
         selectedTower = tower;
+
+
     }
 
     public bool CanBuildOn(BuildNode node, TowerData tower)
     {
+
+
         if (node == null) return false;
         if (tower == null) return false;
         if (!node.CanBuild()) return false;
@@ -40,7 +45,12 @@ public class BuildManager : MonoBehaviour
 
         PlayerResources.instance.Spend(tower.costMoney, 0);
 
-        node.BuildTower(tower);
+        GameObject builtTower = node.BuildTower(tower);
+
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.OnTowerPlaced(builtTower.transform);
+        }
     }
 
     public void CancelBuild()

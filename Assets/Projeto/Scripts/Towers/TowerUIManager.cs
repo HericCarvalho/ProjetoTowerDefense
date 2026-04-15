@@ -53,6 +53,10 @@ public class TowerUIManager : MonoBehaviour
 
         currentTower = tower;
 
+        if (!TutorialBlocker.Instance.CanSelectTower()) return;
+
+        TutorialManager.Instance.OnTowerSelected();
+
         panel.SetActive(true);
         UpdateUI();
 
@@ -109,6 +113,10 @@ public class TowerUIManager : MonoBehaviour
 
     public void UpgradeDamage()
     {
+        if (!TutorialBlocker.Instance.CanUpgradeTower()) return;
+
+        TutorialManager.Instance.OnTowerUpgraded();
+
         currentTower.UpgradeDamage(damageUpgradeAmount);
     }
 

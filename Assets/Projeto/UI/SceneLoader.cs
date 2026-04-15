@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -12,11 +13,23 @@ public class SceneLoader : MonoBehaviour
 
     Image fadeImage;
     Image progressBar;
+
     TextMeshProUGUI loadingText;
+    TextMeshProUGUI levelNameText;
+    TextMeshProUGUI descriptionText;
+    TextMeshProUGUI continueText;
 
     CanvasGroup contentGroup;
+    CanvasGroup introGroup;
 
     public float fadeDuration = 0.5f;
+    public float titleFadeInDuration = 0.6f;
+    public float titleFadeOutDuration = 0.8f;
+    public float titleHoldDuration = 0.5f;
+
+    Typewriter typewriter;
+
+    Coroutine blinkRoutine;
 
     void Awake()
     {
@@ -35,26 +48,37 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadRoutine(sceneName, hudGroup));
     }
 
-    IEnumerator LoadRoutine(string sceneName, CanvasGroup hudGroup = null)
+    IEnumerator LoadRoutine(string sceneName, CanvasGroup hudGroup)
     {
         GameObject loading = Instantiate(loadingPrefab);
         DontDestroyOnLoad(loading);
 
-        Transform canvas = loading.transform.Find("Canvas");
+        Canvas canvas = loading.GetComponentInChildren<Canvas>();
+        canvas.sortingOrder = 9999;
 
-        fadeImage = canvas.Find("FadeImage").GetComponent<Image>();
-        progressBar = canvas.Find("Content/ProgressBar/Fill").GetComponent<Image>();
-        loadingText = canvas.Find("Content/LoadingText").GetComponent<TextMeshProUGUI>();
-        CanvasGroup contentGroup = canvas.Find("Content").GetComponent<CanvasGroup>();
+        fadeImage = canvas.transform.Find("FadeImage").GetComponent<Image>();
+        progressBar = canvas.transform.Find("Content/ProgressBar/Fill").GetComponent<Image>();
+        loadingText = canvas.transform.Find("Content/LoadingText").GetComponent<TextMeshProUGUI>();
 
-        if (contentGroup == null)
-            contentGroup = canvas.Find("Content").gameObject.AddComponent<CanvasGroup>();
+        contentGroup = canvas.transform.Find("Content").GetComponent<CanvasGroup>();
+        introGroup = canvas.transform.Find("Intro").GetComponent<CanvasGroup>();
 
-        contentGroup.alpha = 0f;
+        levelNameText = canvas.transform.Find("Intro/LevelNameText").GetComponent<TextMeshProUGUI>();
+        descriptionText = canvas.transform.Find("Intro/DescriptionText").GetComponent<TextMeshProUGUI>();
+        continueText = canvas.transform.Find("Intro/ContinueText").GetComponent<TextMeshProUGUI>();
+
+        typewriter = loading.GetComponent<Typewriter>();
+
+        CanvasGroup titleCG = levelNameText.GetComponent<CanvasGroup>();
+        CanvasGroup descCG = descriptionText.GetComponent<CanvasGroup>();
+        CanvasGroup contCG = continueText.GetComponent<CanvasGroup>();
 
         Color c = fadeImage.color;
-        c.a = 0f;
+        c.a = 0;
         fadeImage.color = c;
+
+        contentGroup.alpha = 0;
+        introGroup.alpha = 0;
 
         float t = 0;
 
@@ -72,16 +96,10 @@ public class SceneLoader : MonoBehaviour
             yield return null;
         }
 
-        c.a = 1f;
-        fadeImage.color = c;
-
-        if (hudGroup != null)
-            hudGroup.alpha = 0;
-
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
 
-        contentGroup.alpha = 1f;
+        contentGroup.alpha = 1;
 
         while (op.progress < 0.9f)
         {
@@ -103,104 +121,123 @@ public class SceneLoader : MonoBehaviour
         while (!op.isDone)
             yield return null;
 
-        c.a = 1f;
-        fadeImage.color = c;
+        contentGroup.alpha = 0;
+        introGroup.alpha = 1;
 
-        contentGroup.alpha = 1f;
+        LevelData data = null;
 
-        yield return null;
+        if (Levelbase.instance != null)
+            data = Levelbase.instance.GetLevel(sceneName);
 
-        t = 0;
+        string displayName = data != null ? data.displayName : sceneName;
+        string desc = data != null ? data.description : "";
 
-        while (t < fadeDuration)
+        levelNameText.text = displayName;
+
+        titleCG.alpha = 0;
+        descCG.alpha = 0;
+        contCG.alpha = 0;
+
+        yield return StartCoroutine(FadeCanvas(titleCG, 0, 1, titleFadeInDuration));
+        yield return StartCoroutine(FadeCanvas(descCG, 0, 1, 0.3f));
+
+        if (typewriter != null)
+            yield return StartCoroutine(typewriter.Write(descriptionText, desc));
+        else
+            descriptionText.text = desc;
+
+        yield return StartCoroutine(FadeCanvas(contCG, 0, 1, 0.4f));
+
+        blinkRoutine = StartCoroutine(BlinkContinue(contCG, continueText.transform));
+
+        while (true)
         {
-            t += Time.unscaledDeltaTime;
-            float alpha = 1 - Mathf.SmoothStep(0, 1, t / fadeDuration);
-
-            c.a = alpha;
-            fadeImage.color = c;
-
-            contentGroup.alpha = alpha;
+            if (Keyboard.current.anyKey.wasPressedThisFrame ||
+                Mouse.current.leftButton.wasPressedThisFrame)
+                break;
 
             yield return null;
         }
 
-        c.a = 0f;
-        fadeImage.color = c;
+        if (blinkRoutine != null)
+            StopCoroutine(blinkRoutine);
+
+        StartCoroutine(FadeCanvas(descCG, 1, 0, 0.3f));
+        StartCoroutine(FadeCanvas(contCG, 1, 0, 0.3f));
+
+        yield return StartCoroutine(FadeImage(1, 0, fadeDuration));
+
+        yield return new WaitForSecondsRealtime(titleHoldDuration);
+
+        yield return StartCoroutine(FadeCanvas(titleCG, 1, 0, titleFadeOutDuration));
 
         Destroy(loading);
     }
 
-    IEnumerator FadeOut(CanvasGroup hud, CanvasGroup loading)
+    IEnumerator FadeCanvas(CanvasGroup cg, float from, float to, float duration)
+    {
+        float t = 0;
+        cg.alpha = from;
+
+        while (t < duration)
+        {
+            t += Time.unscaledDeltaTime;
+            float smooth = Mathf.SmoothStep(0, 1, t / duration);
+            cg.alpha = Mathf.Lerp(from, to, smooth);
+            yield return null;
+        }
+
+        cg.alpha = to;
+    }
+
+    IEnumerator FadeImage(float from, float to, float duration)
     {
         float t = 0;
         Color c = fadeImage.color;
 
-        c.a = 0;
-        fadeImage.color = c;
-
-        loading.alpha = 0;
-
-        while (t < fadeDuration)
+        while (t < duration)
         {
             t += Time.unscaledDeltaTime;
-            float alpha = Mathf.SmoothStep(0, 1, t / fadeDuration);
-
-            if (hud != null)
-                hud.alpha = 1 - alpha;
-
-            c.a = alpha;
+            c.a = Mathf.Lerp(from, to, t / duration);
             fadeImage.color = c;
-
             yield return null;
         }
 
-        c.a = 1;
+        c.a = to;
         fadeImage.color = c;
-
-        if (hud != null)
-            hud.alpha = 0;
-
-        yield return new WaitForSecondsRealtime(0.1f);
-
-        t = 0;
-
-        while (t < fadeDuration)
-        {
-            t += Time.unscaledDeltaTime;
-            float alpha = Mathf.SmoothStep(0, 1, t / fadeDuration);
-
-            loading.alpha = alpha;
-
-            yield return null;
-        }
-
-        loading.alpha = 1;
     }
 
-    IEnumerator FadeIn(CanvasGroup contentGroup)
+    IEnumerator BlinkContinue(CanvasGroup cg, Transform target)
     {
-        float t = 0;
-        Color c = fadeImage.color;
+        float speed = 1.5f;
 
-        while (t < fadeDuration)
+        while (true)
         {
-            t += Time.unscaledDeltaTime;
-            float alpha = 1 - (t / fadeDuration);
+            float t = 0;
 
-            c.a = alpha;
-            fadeImage.color = c;
+            while (t < 1)
+            {
+                t += Time.unscaledDeltaTime * speed;
 
-            contentGroup.alpha = alpha;
+                cg.alpha = Mathf.SmoothStep(0, 1, t);
+                target.localScale = Vector3.one * (1f + Mathf.Sin(Time.unscaledTime * 2f) * 0.05f);
 
-            yield return null;
+                yield return null;
+            }
+
+            t = 0;
+
+            while (t < 1)
+            {
+                t += Time.unscaledDeltaTime * speed;
+
+                cg.alpha = Mathf.SmoothStep(1, 0, t);
+                target.localScale = Vector3.one * (1f + Mathf.Sin(Time.unscaledTime * 2f) * 0.05f);
+
+                yield return null;
+            }
         }
-
-        c.a = 0;
-        fadeImage.color = c;
-        contentGroup.alpha = 0;
     }
-
     public void LoadSceneByIndex(int index, CanvasGroup hudGroup = null)
     {
         string sceneName = SceneManager.GetSceneByBuildIndex(index).name;
