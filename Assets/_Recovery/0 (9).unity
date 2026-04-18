@@ -284,7 +284,6 @@ GameObject:
   - component: {fileID: 245240662}
   - component: {fileID: 245240661}
   - component: {fileID: 245240663}
-  - component: {fileID: 245240664}
   m_Layer: 0
   m_Name: TutorialManager
   m_TagString: Untagged
@@ -361,22 +360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Typewriter
   speed: 0.05
---- !u!114 &245240664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245240658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b3c2da7c9061f940b6b012e9d771df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialUI
-  hand: {fileID: 0}
-  clickScaleMin: 0.8
-  clickSpeed: 0.3
-  dragSpeed: 1
 --- !u!1001 &247325727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,7 +446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3400900863022503335, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4015143157467279628, guid: 527f6cad6ffd33943baa6260915bc4d2, type: 3}
       propertyPath: necroUI
@@ -1117,7 +1100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &719976648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,7 +1273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1785,7 +1768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2019849418
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1847,10 +1830,10 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1129332795}
   - {fileID: 1481451084}
   - {fileID: 247325727}
-  - {fileID: 1129332795}
-  - {fileID: 878426762}
   - {fileID: 245240662}
   - {fileID: 516728259}
+  - {fileID: 878426762}
   - {fileID: 719976651}
