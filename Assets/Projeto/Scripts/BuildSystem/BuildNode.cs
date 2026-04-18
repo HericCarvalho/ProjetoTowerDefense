@@ -8,14 +8,7 @@ public class BuildNode : MonoBehaviour
 
     public bool CanBuild()
     {
-        if (TutorialBlocker.Instance != null && !TutorialBlocker.Instance.CanClickNode())
-            
         BuildMenuUI.instance.OpenMenu(this);
-
-        if (TutorialManager.Instance != null)
-        {
-            TutorialManager.Instance.OnNodeClicked(transform);
-        }
 
         return tower == null;
 

@@ -1,24 +1,32 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager Instance;
 
-    public TutorialSteps currentStep;
-
-    public bool isTutorialActive = true;
-
     [Header("UI")]
-    public TutorialUI tutorialUI;
+    public CanvasGroup panelGroup;
+    public Image darkOverlay;
 
-    [Header("Referências")]
-    public Transform towerIcon;
-    public Transform startWaveButton;
-    public Transform upgradeButton;
+    public RectTransform highlightCircle;
+    public RectTransform arrow;
 
-    Transform currentNode;
-    Transform placedTower;
+    public TextMeshProUGUI tutorialText;
+    public TextMeshProUGUI continueText;
+
+    [Header("Steps")]
+    public List<TutorialSteps> steps;
+
+    int currentStep = 0;
+    bool isActive = false;
+    bool canContinue = false;
+
+    Typewriter typewriter;
 
     void Awake()
     {
@@ -27,103 +35,123 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
-        int sceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("Tutorial iniciou");
 
-        isTutorialActive = (sceneIndex == 1);
-
-        Debug.Log("Tutorial ativo: " + isTutorialActive);
-
-        if (!isTutorialActive)
+        if (PlayerPrefs.GetInt("tutorial_done", 0) == 1)
         {
-            tutorialUI.HideAll();
+            gameObject.SetActive(false);
             return;
         }
 
-        Debug.Log("Iniciando tutorial...");
-        StartStep(TutorialSteps.OpenShop);
+        typewriter = GetComponent<Typewriter>();
+
+        StartCoroutine(StartTutorial());
     }
 
-    public void StartStep(TutorialSteps step)
+    void Update()
     {
-        currentStep = step;
+        if (!isActive || !canContinue) return;
 
-        Debug.Log("STEP: " + step);
+        bool clicked = false;
 
-        switch (step)
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            clicked = true;
+
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+            clicked = true;
+
+        if (clicked)
         {
-            case TutorialSteps.OpenShop:
-                currentNode = FindFirstObjectByType<BuildNode>()?.transform;
-
-                Debug.Log("Node encontrado: " + currentNode);
-
-                tutorialUI.ShowClick(currentNode);
-                break;
-        }
-    }
-
-    public void NextStep()
-    {
-        if (!isTutorialActive) return;
-
-        int next = (int)currentStep + 1;
-
-        if (next > (int)TutorialSteps.Completed)
-        {
-            StartStep(TutorialSteps.Completed);
-            return;
+            canContinue = false;
+            NextStep();
         }
 
-        StartCoroutine(NextStepRoutine((TutorialSteps)next));
+        continueText.alpha = Mathf.Abs(Mathf.Sin(Time.unscaledTime * 2f));
     }
 
-    IEnumerator NextStepRoutine(TutorialSteps step)
+    IEnumerator StartTutorial()
     {
-        yield return new WaitForSeconds(0.4f);
-        StartStep(step);
+        Debug.Log("StartTutorial rodando");
+
+        panelGroup.alpha = 0;
+        gameObject.SetActive(true);
+
+        yield return FadeCanvas(panelGroup, 0, 1, 0.3f);
+
+        isActive = true;
+        currentStep = 0;
+
+        yield return ShowStep();
     }
 
-
-    public void OnNodeClicked(Transform node)
+    IEnumerator ShowStep()
     {
-        if (currentStep != TutorialSteps.OpenShop) return;
+        canContinue = false;
 
-        currentNode = node;
-        NextStep();
+        if (currentStep >= steps.Count)
+        {
+            yield return EndTutorial();
+            yield break;
+        }
+
+        TutorialSteps step = steps[currentStep];
+
+        yield return new WaitForSecondsRealtime(step.delayBefore);
+
+        if (step.target != null)
+        {
+            Vector3 pos = Camera.main.WorldToScreenPoint(step.target.position);
+
+            highlightCircle.position = pos + step.offset;
+            arrow.position = pos + step.offset;
+        }
+
+        highlightCircle.gameObject.SetActive(step.useCircle);
+        arrow.gameObject.SetActive(step.useArrow);
+
+        tutorialText.text = "";
+
+        yield return StartCoroutine(typewriter.Write(tutorialText, step.text));
+
+        continueText.gameObject.SetActive(true);
+
+        canContinue = true;
     }
 
-    public void OnTowerDragged()
+    void NextStep()
     {
-        if (currentStep != TutorialSteps.DragTower) return;
-
-        NextStep();
+        continueText.gameObject.SetActive(false);
+        currentStep++;
+        StartCoroutine(ShowStep());
     }
 
-    public void OnTowerPlaced(Transform tower)
+    IEnumerator EndTutorial()
     {
-        if (currentStep != TutorialSteps.PlaceTower) return;
+        canContinue = false;
 
-        placedTower = tower;
-        NextStep();
+        yield return FadeCanvas(panelGroup, 1, 0, 0.4f);
+
+        PlayerPrefs.SetInt("tutorial_done", 1);
+        PlayerPrefs.Save();
+
+        gameObject.SetActive(false);
     }
 
-    public void OnWaveStarted()
+    IEnumerator FadeCanvas(CanvasGroup cg, float from, float to, float duration)
     {
-        if (currentStep != TutorialSteps.StartWave) return;
+        float t = 0;
 
-        NextStep();
+        while (t < duration)
+        {
+            t += Time.unscaledDeltaTime;
+            cg.alpha = Mathf.Lerp(from, to, t / duration);
+            yield return null;
+        }
+
+        cg.alpha = to;
     }
-
-    public void OnTowerSelected()
+    public bool IsBlockingInput()
     {
-        if (currentStep != TutorialSteps.SelectTower) return;
-
-        NextStep();
-    }
-
-    public void OnTowerUpgraded()
-    {
-        if (currentStep != TutorialSteps.UpgradeTower) return;
-
-        NextStep();
+        return isActive;
     }
 }

@@ -11,6 +11,9 @@ public class InputManager : MonoBehaviour
 
     void HandleInput()
     {
+        if (TutorialManager.Instance != null && TutorialManager.Instance.IsBlockingInput())
+            return;
+
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
             HandleClick(Touchscreen.current.primaryTouch.position.ReadValue());
@@ -24,6 +27,10 @@ public class InputManager : MonoBehaviour
 
     void HandleClick(Vector2 screenPosition)
     {
+        if (TutorialManager.Instance != null && TutorialManager.Instance.IsBlockingInput())
+            return;
+
+
         if (IsPointerOverUI())
             return;
 

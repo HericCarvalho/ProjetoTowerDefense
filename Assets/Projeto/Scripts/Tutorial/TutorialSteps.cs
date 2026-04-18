@@ -1,10 +1,16 @@
-public enum TutorialSteps
+using UnityEngine;
+
+[System.Serializable]
+public class TutorialSteps
 {
-    OpenShop,
-    DragTower,
-    PlaceTower,
-    StartWave,
-    SelectTower,
-    UpgradeTower,
-    Completed
+    [TextArea] public string text;
+
+    public Transform target;
+
+    public bool useCircle = true;
+    public bool useArrow = false;
+
+    public Vector3 offset;
+
+    public float delayBefore = 0.2f;
 }

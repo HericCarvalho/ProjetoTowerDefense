@@ -47,10 +47,6 @@ public class BuildManager : MonoBehaviour
 
         GameObject builtTower = node.BuildTower(tower);
 
-        if (TutorialManager.Instance != null)
-        {
-            TutorialManager.Instance.OnTowerPlaced(builtTower.transform);
-        }
     }
 
     public void CancelBuild()
