@@ -3351,7 +3351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem.MusicManager
   AutoUnparentOnAwake: 1
-  initialPlaylist: []
+  initialPlaylist:
+  - {fileID: 8300000, guid: 4f19c8a32d3e69e438408ca6e0aabc28, type: 3}
   musicMixerGroup: {fileID: -1075763674197638455, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
 --- !u!114 &1340454253
 MonoBehaviour:

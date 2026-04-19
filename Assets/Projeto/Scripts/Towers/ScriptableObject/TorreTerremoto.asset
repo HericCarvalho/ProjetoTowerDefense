@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: Torre Terremoto
   prefab: {fileID: 8919679645820292701, guid: c164af1a3a317504baabc7d3e8357bcf, type: 3}
-  baseRange: 23
-  baseFireRate: 0.1
+  baseRange: 30
+  baseFireRate: 1
   rangePerLevel: 0.03
   fireRatePerLevel: 0.025
   baseXPToLevel: 40

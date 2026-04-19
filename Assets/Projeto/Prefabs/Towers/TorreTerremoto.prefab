@@ -848,6 +848,7 @@ MonoBehaviour:
   currentXP: 0
   xpToNextLevel: 0
   upgradePoints: 0
+  isPreview: 0
 --- !u!114 &3916737435796732791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,3 +897,26 @@ MonoBehaviour:
   slowMultiplier: 0.3
   stunDuration: 1
   effectPrefab: {fileID: 1992394677384095584, guid: 8a0154b64d650624392241efe45ab603, type: 3}
+  soundData:
+    clip: {fileID: 8300000, guid: 4154cfcacc6527c4bbcb7aefa3525f59, type: 3}
+    mixerGroup: {fileID: -5151788706607545606, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
+    loop: 0
+    playOnAwake: 1
+    frequentSound: 1
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0

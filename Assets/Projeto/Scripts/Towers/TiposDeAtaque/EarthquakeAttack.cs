@@ -32,6 +32,14 @@ public class EarthquakeAttack : MonoBehaviour
 
     public void Execute(Vector3 position, float damageMultiplier, float range, Tower owner)
     {
+        if (soundData != null)
+        {
+            SoundManager.Instance.CreateSoundBuilder()
+                .WithPosition(position) 
+                .WithRandomPitch()      
+                .Play(soundData);
+        }
+
         if (EnemyManager.instance == null) return;
 
         Transform[] snapshot = EnemyManager.instance.enemies.ToArray();

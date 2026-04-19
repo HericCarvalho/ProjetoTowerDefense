@@ -81,11 +81,11 @@ MonoBehaviour:
   stunDuration: 0
   baseDamage: 0
   soundData:
-    clip: {fileID: 8300000, guid: 612d6cd3b19dd93449cfd09e09cc0535, type: 3}
+    clip: {fileID: 8300000, guid: e19241f81af742e4c8347cea9bb6cb5f, type: 3}
     mixerGroup: {fileID: -5151788706607545606, guid: 234ea390b5bef3049ba15e8eaf46f092, type: 2}
     loop: 0
     playOnAwake: 1
-    frequentSound: 0
+    frequentSound: 1
     mute: 0
     bypassEffects: 0
     bypassListenerEffects: 0
