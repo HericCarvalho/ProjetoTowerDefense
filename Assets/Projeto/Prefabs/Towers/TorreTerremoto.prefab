@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 1764484535780007288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.23986, y: 0.23986, z: 0.23986}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8655194507424828051}
@@ -270,7 +270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 14.400002}
   m_SizeDelta: {x: 3040, y: 1440}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7467368569125090049
@@ -684,15 +684,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -734,9 +734,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
       propertyPath: m_Name
       value: TorreTerremoto
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240644097782854366, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6240644097782854366, guid: 61c90ff4246aa43b7809499c6816c9a2, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -796,10 +816,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 16.6708
-  m_Height: 52.962402
+  m_Radius: 6.7
+  m_Height: 14.48
   m_Direction: 1
-  m_Center: {x: 0, y: 16.55225, z: 0.8181572}
+  m_Center: {x: 0, y: 4.9, z: 0.8181572}
 --- !u!95 &707648833820331436
 Animator:
   serializedVersion: 7

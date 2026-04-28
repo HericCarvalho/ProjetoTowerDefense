@@ -738,6 +738,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TorreMagica
       objectReference: {fileID: 0}
+    - target: {fileID: 1247703602346448596, guid: c275482622fd94fab8345fab70f938b0, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247703602346448596, guid: c275482622fd94fab8345fab70f938b0, type: 3}
+      propertyPath: m_RayTracingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7402737990911837575, guid: c275482622fd94fab8345fab70f938b0, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -849,6 +857,7 @@ MonoBehaviour:
   currentXP: 0
   xpToNextLevel: 0
   upgradePoints: 0
+  isPreview: 0
 --- !u!114 &4596672652455556488
 MonoBehaviour:
   m_ObjectHideFlags: 0

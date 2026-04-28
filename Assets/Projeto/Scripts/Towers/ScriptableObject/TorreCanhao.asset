@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TorreCanhao
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: "TorreCanh\xE3o"
-  prefab: {fileID: 5087429130691917703, guid: be6555c8b73a1a44bb109c90b377aff5, type: 3}
+  prefab: {fileID: 8792114619394608379, guid: 28f7dad003557a0429e38a7666eab131, type: 3}
   baseRange: 27
   baseFireRate: 0.6
   rangePerLevel: 0.07
