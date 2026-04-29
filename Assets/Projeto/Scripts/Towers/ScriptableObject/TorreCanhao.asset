@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   towerName: "TorreCanh\xE3o"
   prefab: {fileID: 8792114619394608379, guid: 28f7dad003557a0429e38a7666eab131, type: 3}
-  baseRange: 27
+  baseRange: 17
   baseFireRate: 0.6
   rangePerLevel: 0.07
   fireRatePerLevel: 0.03
-  baseXPToLevel: 20
+  baseXPToLevel: 40
   baseUpgradeCost: 5
   costMultiplier: 1.5
   costMoney: 100
