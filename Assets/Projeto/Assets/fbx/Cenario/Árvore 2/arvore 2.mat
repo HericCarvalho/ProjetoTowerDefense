@@ -27,14 +27,14 @@ Material:
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
   - _ALPHATEST_ON
+  - _DETAIL_MULX2
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
-  - _PARALLAXMAP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
@@ -71,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b567f20ad4068a04a8f36fd7be6023b0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -123,7 +123,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 8312e03598ab75947b207dbe58851b78, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -170,14 +170,14 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BlendOp: 0
-    - _BumpScale: 1
+    - _BumpScale: 0
     - _ClearCoat: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
-    - _Cutoff: 0.258
+    - _Cull: 0
+    - _Cutoff: 0.39
     - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
+    - _DetailNormalMapScale: 2
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _EnableHeightBlend: 0
@@ -194,10 +194,10 @@ Material:
     - _Metallic3: 0
     - _NumLayersCount: 1
     - _OcclusionStrength: 1
-    - _Parallax: 0.005
+    - _Parallax: 0.0474
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
     - _Smoothness2: 0.5
